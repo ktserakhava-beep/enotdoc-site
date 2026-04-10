@@ -1,0 +1,11 @@
+company,segment,legal_entities_est,sku_complexity,owner_guess,rop_fit,priority,status,source,notes
+ROP-001,импортер consumer goods,1-3,100-500,главбух / operations,high,A,to-research,manual shortlist,Default ICP archetype
+ROP-002,дистрибьютор в упаковке,1-3,200-1000,финансы / ВЭД,high,A,to-research,manual shortlist,Процесс вероятно живет в Excel/1C
+ROP-003,оптовик с импортом,1-2,100-500,бухгалтер / ВЭД,medium,B,to-research,manual shortlist,Хорош для discovery
+ROP-004,импортер бытовых товаров,1-3,300-1000,operations / finance,high,A,to-research,manual shortlist,Хороший second-track кандидат
+ROP-005,дистрибьютор FMCG,1-3,300-1000,главбух / supply chain,high,A,to-research,manual shortlist,Проверить owner процесса
+ROP-006,производитель / импортер упаковки,1-2,50-300,директор / finance,medium,B,to-research,manual shortlist,Secondary ICP
+ROP-007,импортер товаров для дома,1-3,100-700,finance / logistics,high,B,to-research,manual shortlist,Проверить source docs readiness
+ROP-008,дистрибьютор non-food,1-3,100-800,главбух,medium,B,to-research,manual shortlist,Discovery candidate
+ROP-009,импортно-складская компания,1-2,100-400,ВЭД / operations,medium,B,to-research,manual shortlist,Нужна buyer clarity
+ROP-010,consumer importer,1-3,200-900,finance owner,high,A,to-research,manual shortlist,Target for 3-5 discovery calls

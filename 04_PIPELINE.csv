@@ -1,0 +1,6 @@
+company,track,segment,contact_name,contact_role,source,current_stage,signal_score,buyer_clarity,urgency,fit,price_reaction,source_docs_ready,red_flags,next_step,next_step_date,notes
+Example Manufacturing LLC,Waste,малое производство,Иван Иванов,директор,warm intro,discovery,7,high,high,good,neutral,partial,none,send scope and proposal,2026-04-08,Типовой waste-fit кейс с 1 площадкой и неполной документацией
+Example Distribution LLC,Waste,оптовик со складом,Мария Петрова,главбух,outbound,qualified,5,medium,medium,good,unknown,partial,none,book discovery call,2026-04-09,Secondary ICP через бухгалтерский контур
+Example Import Group,ROP,импортер consumer goods,Алексей Смирнов,operations manager,partner intro,discovery,6,medium,medium,good,unknown,no,new owner unclear,clarify owner and source docs,2026-04-10,Second-track candidate; process likely in Excel/1C
+Example Service Network,Auto,сеть СТО,Ольга Козлова,операционный руководитель,warm intro,holding,4,medium,medium,good,unknown,partial,wait until waste proof,keep warm and revisit after first waste case,2026-04-15,Auto vertical held until waste traction
+Example Accounting Partner,Partners,бухгалтерский аутсорсер,Сергей Андреев,owner,outbound,partner-check,6,high,medium,good,not_applicable,not_applicable,none,ask for 1-2 warm intros,2026-04-08,Primary partner archetype for waste channel

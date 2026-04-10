@@ -1,0 +1,11 @@
+company,partner_type,client_fit,channel_fit,priority,status,first_contact,next_step,notes
+PARTNER-001,бухгалтерский аутсорсер,SMB waste-fit,high,A,to-research,,Нужен первый shortlist бухгалтерских партнеров
+PARTNER-002,бухгалтерский аутсорсер,SMB waste-fit,high,A,to-research,,Primary partner archetype
+PARTNER-003,бухгалтерский аутсорсер,SMB + импорт,high,A,to-research,,Полезен и для later ROP
+PARTNER-004,waste-подрядчик / утилизатор,waste docs pain,medium-high,B,to-research,,Second wave partner type
+PARTNER-005,waste-подрядчик / утилизатор,waste docs pain,medium-high,B,to-research,,Подходит для referral/co-delivery
+PARTNER-006,эко-консалтинг,eco docs,medium,C,to-research,,Selective later partner
+PARTNER-007,ВЭД-консультант,ROP/import pain,medium,C,to-research,,Later bridge into ROP
+PARTNER-008,1C / ERP партнер,ops/process clients,low-medium,C,to-research,,Do not activate too early
+PARTNER-009,бухгалтерский аутсорсер,regional SMB,high,B,to-research,,Useful for regional intros
+PARTNER-010,waste-подрядчик / recycler,regional ops,medium,B,to-research,,Check if they can introduce SMB clients

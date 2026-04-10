@@ -1,0 +1,27 @@
+# Fit-Check Case Sheet
+
+- Case ID: `2026-04-10-test-ooo-paketservis`
+- Company: `ООО "ПакетСервис"`
+- Date intake reviewed: `2026-04-10`
+- Contact: `Марина Коваль, операционный менеджер`
+- Documents received:
+  - `instruction_waste_paketservis_2024.docx`
+  - `POD_paketservis_scan_2023.pdf`
+  - `1-othody_Q4_2025.xlsx`
+  - `act_ecoutil_2025-11.pdf`
+  - `act_ecoutil_2025-12.pdf`
+  - `dogovor_ecoutil_signed.pdf`
+- Missing / unclear:
+  - readable current POD
+  - confirmation of latest instruction version
+  - confirmation of full contractor set
+- Red flags:
+  - partial source readability in POD
+  - possible outdated document versioning
+- Verdict: `FOLLOW-UP`
+- Short reason:
+  - The case fits `1 legal entity / 1 site`.
+  - Basic source layer exists.
+  - Safe setup decision is blocked by incomplete or unclear POD source quality.
+- Client output prepared:
+  - `fit-check-report.md`
