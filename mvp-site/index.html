@@ -148,6 +148,34 @@
           </p>
         </section>
 
+        <section class="showcase-intro">
+          <h2>Когда это обычно нужно</h2>
+
+          <p class="showcase-intro-text">
+            Чаще всего к нам приходят, когда ищут:
+          </p>
+
+          <ul class="showcase-intro-list">
+            <li>документы по отходам Беларусь что нужно</li>
+            <li>что делать с отходами на предприятии</li>
+            <li>отчет 1-отходы как понять</li>
+            <li>экологические документы для бизнеса</li>
+          </ul>
+
+          <h2>Что делать, если документы по отходам не в порядке</h2>
+
+          <p class="showcase-intro-text">
+            Если коротко:
+            не нужно сразу делать новые документы.
+            Сначала важно понять, что уже есть и что из этого актуально.
+          </p>
+
+          <p class="showcase-intro-text">
+            В большинстве случаев проблема не в отсутствии документов,
+            а в их структуре и контроле.
+          </p>
+        </section>
+
         <section class="showcase-strip" id="fit">
             <article class="showcase-card showcase-card-main tone-copper">
               <div class="showcase-visual"></div>
@@ -429,13 +457,153 @@
         const form = document.getElementById("intake-form");
         const button = document.getElementById("intake-submit");
         const status = document.getElementById("form-status");
+        const emailLinks = document.querySelectorAll('a[href="mailto:enotdoc@proton.me"]');
+        const sourceField = form?.querySelector('input[name="source"]');
+        const sourceParam = new URLSearchParams(window.location.search).get("from");
+        const savedSource = localStorage.getItem("lead_source");
+        const sessionFlags = {
+          formStarted: sessionStorage.getItem("form_started") === "1",
+          formVisible: sessionStorage.getItem("form_visible") === "1",
+          engaged30s: sessionStorage.getItem("engaged_30s") === "1",
+          scroll70: sessionStorage.getItem("scroll_70") === "1",
+          validationError: sessionStorage.getItem("validation_error") === "1",
+          formAbandon: sessionStorage.getItem("form_abandon") === "1",
+          returnVisit: sessionStorage.getItem("return_visit") === "1",
+          copyEmail: sessionStorage.getItem("copy_email") === "1",
+          leadSent: sessionStorage.getItem("lead_sent") === "1",
+          qualifiedLead: sessionStorage.getItem("qualified_lead") === "1",
+        };
+        let abandonTimer = null;
 
         if (!form || !button || !status) return;
+
+        const trackGoal = (goal) => {
+          if (typeof ym === "function") {
+            ym(108501289, "reachGoal", goal);
+          }
+        };
+
+        const persistSource = () => {
+          const resolvedSource = sourceParam || savedSource || document.referrer || "direct";
+          localStorage.setItem("lead_source", resolvedSource);
+
+          if (sourceField) {
+            sourceField.value = resolvedSource;
+          }
+
+          return resolvedSource;
+        };
+
+        persistSource();
+
+        if (!sessionFlags.returnVisit && localStorage.getItem("site_visited") === "1") {
+          sessionFlags.returnVisit = true;
+          sessionStorage.setItem("return_visit", "1");
+          trackGoal("return_visit");
+        }
+
+        localStorage.setItem("site_visited", "1");
+
+        button.addEventListener("click", () => {
+          trackGoal("click_submit");
+        });
+
+        emailLinks.forEach((link) => {
+          link.addEventListener("click", () => {
+            trackGoal("click_email");
+          });
+        });
+
+        document.addEventListener("copy", () => {
+          if (sessionFlags.copyEmail) return;
+
+          const selectedText = window.getSelection ? window.getSelection().toString() : "";
+          if (!selectedText || !selectedText.includes("enotdoc@proton.me")) return;
+
+          sessionFlags.copyEmail = true;
+          sessionStorage.setItem("copy_email", "1");
+          trackGoal("copy_email");
+        });
+
+        const scheduleAbandon = () => {
+          if (abandonTimer || sessionFlags.formAbandon || sessionFlags.leadSent) return;
+
+          abandonTimer = window.setTimeout(() => {
+            if (sessionFlags.formAbandon || sessionFlags.leadSent || !sessionFlags.formStarted) return;
+            sessionFlags.formAbandon = true;
+            sessionStorage.setItem("form_abandon", "1");
+            trackGoal("form_abandon");
+          }, 120000);
+        };
+
+        const markFormStarted = () => {
+          if (sessionFlags.formStarted) return;
+          sessionFlags.formStarted = true;
+          sessionStorage.setItem("form_started", "1");
+          trackGoal("form_start");
+          scheduleAbandon();
+        };
+
+        form.addEventListener("focusin", markFormStarted);
+        form.addEventListener("input", markFormStarted);
+
+        if (!sessionFlags.formVisible && "IntersectionObserver" in window) {
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting || sessionFlags.formVisible) return;
+              sessionFlags.formVisible = true;
+              sessionStorage.setItem("form_visible", "1");
+              trackGoal("scroll_to_form");
+              observer.disconnect();
+            });
+          }, { threshold: 0.35 });
+
+          observer.observe(form);
+        }
+
+        if (!sessionFlags.engaged30s) {
+          window.setTimeout(() => {
+            if (sessionFlags.engaged30s) return;
+            sessionFlags.engaged30s = true;
+            sessionStorage.setItem("engaged_30s", "1");
+            trackGoal("engaged_30s");
+          }, 30000);
+        }
+
+        const onScrollDepth = () => {
+          if (sessionFlags.scroll70) return;
+
+          const scrollTop = window.scrollY || window.pageYOffset;
+          const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
+          const percent = documentHeight > 0 ? (scrollTop / documentHeight) * 100 : 0;
+
+          if (percent < 70) return;
+
+          sessionFlags.scroll70 = true;
+          sessionStorage.setItem("scroll_70", "1");
+          trackGoal("scroll_70");
+          window.removeEventListener("scroll", onScrollDepth);
+        };
+
+        window.addEventListener("scroll", onScrollDepth, { passive: true });
+        onScrollDepth();
 
         form.addEventListener("submit", async (event) => {
           event.preventDefault();
 
+          if (!form.checkValidity()) {
+            if (!sessionFlags.validationError) {
+              sessionFlags.validationError = true;
+              sessionStorage.setItem("validation_error", "1");
+              trackGoal("validation_error");
+            }
+            form.reportValidity();
+            return;
+          }
+
+          const resolvedSource = persistSource();
           const formData = new FormData(form);
+          formData.set("source", resolvedSource);
           const payload = Object.fromEntries(formData.entries());
 
           button.disabled = true;
@@ -456,10 +624,27 @@
               throw new Error("request_failed");
             }
 
+            ym(108501289, 'reachGoal', 'lead');
+            sessionFlags.leadSent = true;
+            sessionStorage.setItem("lead_sent", "1");
+
+            if (abandonTimer) {
+              window.clearTimeout(abandonTimer);
+              abandonTimer = null;
+            }
+
+            if (sessionFlags.formVisible && sessionFlags.formStarted && !sessionFlags.qualifiedLead) {
+              sessionFlags.qualifiedLead = true;
+              sessionStorage.setItem("qualified_lead", "1");
+              trackGoal("qualified_lead");
+            }
+
             form.reset();
+            persistSource();
             status.textContent = "Спасибо. Заявку получили. Вернемся с первым следующим шагом в течение 24 часов.";
             status.className = "form-status is-success";
           } catch (error) {
+            trackGoal("form_error");
             status.textContent = "Не удалось отправить заявку. Попробуйте еще раз через минуту или свяжитесь напрямую.";
             status.className = "form-status is-error";
           } finally {
