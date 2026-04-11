@@ -1458,6 +1458,13 @@ textarea:focus-visible {
   box-shadow: var(--shadow-soft);
 }
 
+.seo-panel-warm {
+  border-color: rgba(191, 123, 66, 0.2);
+  background:
+    linear-gradient(180deg, rgba(191, 123, 66, 0.18), rgba(191, 123, 66, 0.1)),
+    rgba(255, 251, 245, 0.84);
+}
+
 .seo-panel h2 {
   margin: 0 0 12px;
   font-family: "Manrope", sans-serif;
