@@ -1459,9 +1459,9 @@ textarea:focus-visible {
 }
 
 .seo-panel-warm {
-  border-color: rgba(191, 123, 66, 0.22);
-  background: linear-gradient(135deg, #a86637, #bf7b42);
-  box-shadow: 0 18px 42px rgba(191, 123, 66, 0.18);
+  border-color: rgba(160, 124, 91, 0.24);
+  background: linear-gradient(135deg, #8f6447, #a97a57);
+  box-shadow: 0 18px 42px rgba(143, 100, 71, 0.16);
 }
 
 .seo-panel-warm h2,
