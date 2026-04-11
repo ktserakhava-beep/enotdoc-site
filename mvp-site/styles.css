@@ -1742,3 +1742,37 @@ textarea:focus-visible {
     transform: translateY(0);
   }
 }
+
+.seo-use-cases,
+.seo-answer {
+  margin-top: 28px;
+  padding: 28px;
+  border-radius: 18px;
+  background: rgba(255, 251, 245, 0.8);
+  border: 1px solid rgba(24, 20, 14, 0.06);
+  box-shadow: 0 12px 28px rgba(53, 39, 20, 0.06);
+}
+
+/* список */
+.seo-use-cases ul {
+  margin-top: 14px;
+  padding-left: 18px;
+  text-align: left;
+}
+
+.seo-use-cases li {
+  margin-bottom: 10px;
+  line-height: 1.7;
+  color: var(--text);
+}
+
+/* усиливаем заголовки */
+.seo-use-cases h2,
+.seo-answer h2 {
+  margin-bottom: 12px;
+}
+
+/* текст */
+.seo-answer p {
+  margin-bottom: 12px;
+}
