@@ -1255,13 +1255,13 @@ textarea:focus-visible {
 }
 
 .hero-text {
-  max-width: 72ch;
+  max-width: 56ch;
   font-size: 1.02rem;
   line-height: 1.84;
 }
 
 .hero-definition {
-  max-width: 74ch;
+  max-width: 56ch;
   margin: 0 auto 14px;
   color: var(--text);
   font-size: 0.98rem;
@@ -1319,14 +1319,6 @@ textarea:focus-visible {
   transform: translateY(-2px);
 }
 
-.showcase-card-main .showcase-line {
-  display: inline;
-}
-
-.showcase-card-main .showcase-line + .showcase-line::before {
-  content: " ";
-}
-
 .showcase-card:nth-child(2) {
   animation-delay: 100ms;
 }
@@ -1371,10 +1363,6 @@ textarea:focus-visible {
   padding: 18px 18px 16px;
   background: rgba(255, 248, 239, 0.9);
   backdrop-filter: blur(14px);
-}
-
-.showcase-card-main .showcase-copy p {
-  max-width: 34ch;
 }
 
 .showcase-card.tone-copper .showcase-copy {
