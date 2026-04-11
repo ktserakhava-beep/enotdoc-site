@@ -4,6 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>enotdoc</title>
+    <meta
+      name="description"
+      content="Разбор документов по отходам для бизнеса в Беларуси. Проверим, что есть, чего не хватает и какие следующие шаги."
+    />
+    <meta property="og:title" content="Разбор документов по отходам — Беларусь" />
+    <meta
+      property="og:description"
+      content="Проверка документов по отходам за 24 часа. Понимание, что есть и чего не хватает."
+    />
+    <meta property="og:type" content="website" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -249,7 +259,7 @@
               </p>
             </div>
 
-            <form class="intake-form" id="intake-form">
+            <form class="intake-form" id="intake-form" method="POST" action="https://script.google.com/macros/s/AKfycby5GkFFej0Zdh9Pj6RpmL_pFXWxPoLOu_FtoPluKFMV4xn2uXPmwuxm0rcQaWfTPN5OLQ/exec">
               <input type="hidden" name="source" value="website" />
               <label>
                 Компания
@@ -281,7 +291,7 @@
               </button>
 
               <label class="consent-note">
-                <input type="checkbox" required>
+                <input type="checkbox" name="consent" required>
                 Я даю согласие на обработку персональных данных
               </label>
 
@@ -354,5 +364,8 @@
         });
       })();
     </script>
+    <a href="https://t.me/EnotDoc_Assistant_Bot" target="_blank" class="tg-button" aria-label="Написать в Telegram">
+      💬
+    </a>
   </body>
 </html>

@@ -1,18 +1,24 @@
 :root {
   --bg: #f5eee3;
   --surface: #fbf5eb;
-  --surface-2: #f4eadb;
+  --surface-2: #f1e6d7;
+  --surface-soft: #f1e6d7;
   --text: #171511;
   --muted: #6f685c;
-  --line: rgba(28, 24, 18, 0.08);
+  --line: rgba(23, 21, 17, 0.06);
   --accent: #1f352a;
   --accent-2: #bf7b42;
+  --accent-warm: #bf7b42;
   --button: #171511;
   --card-green: #6d7d63;
   --card-dark: #2d342f;
   --logo-dark: #2a231c;
-  --logo-warm: #c77d45;
-  --logo-green: #6f8167;
+  --deep: #2a231c;
+  --logo-warm: #bf7b42;
+  --logo-green: #6d7d63;
+  --pending: #a07c5b;
+  --success: #486144;
+  --error: #9b4e39;
   --shadow: 0 24px 60px rgba(53, 39, 20, 0.08);
   --shadow-soft: 0 14px 36px rgba(53, 39, 20, 0.06);
 }
@@ -32,7 +38,7 @@ body {
   background:
     radial-gradient(circle at top left, rgba(183, 149, 104, 0.12), transparent 22%),
     radial-gradient(circle at top right, rgba(120, 134, 100, 0.1), transparent 24%),
-    linear-gradient(180deg, #f8f2e8 0%, #f4ecdf 58%, #f0e8dc 100%);
+    linear-gradient(180deg, #f8f2e8 0%, #f4ecdf 100%);
   overflow-x: hidden;
 }
 
@@ -676,7 +682,7 @@ body {
 }
 
 .result-panel-large {
-  background: #f1e6d7;
+  background: var(--surface-soft);
 }
 
 .result-panel ul {
@@ -691,7 +697,7 @@ body {
 .result-visual {
   min-height: 226px;
   padding: 0;
-  background: #ddd2c2;
+  background: var(--surface-soft);
 }
 
 .result-visual-image {
@@ -812,15 +818,15 @@ body {
 }
 
 .form-status.is-pending {
-  color: #7c6f5f;
+  color: var(--pending);
 }
 
 .form-status.is-success {
-  color: #486144;
+  color: var(--success);
 }
 
 .form-status.is-error {
-  color: #9b4e39;
+  color: var(--error);
 }
 
 @media (max-width: 1024px) {
@@ -1072,4 +1078,45 @@ body {
   .section-heading h2 {
     font-size: 1.32rem;
   }
+}
+
+:focus-visible {
+  outline: 2px solid #000;
+  outline-offset: 2px;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #000;
+  outline-offset: 2px;
+}
+
+.tg-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #0088cc;
+  color: white;
+  font-size: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  transition: transform 0.2s ease;
+}
+
+.tg-button:hover {
+  transform: scale(1.1);
+}
+
+.tg-button:focus-visible {
+  outline: 2px solid #000;
+  outline-offset: 3px;
 }
