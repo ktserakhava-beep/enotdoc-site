@@ -42,7 +42,20 @@ body {
   overflow-x: hidden;
 }
 
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(191, 123, 66, 0.06), transparent 30%),
+    radial-gradient(circle at 80% 0%, rgba(31, 53, 42, 0.06), transparent 30%);
+  pointer-events: none;
+  z-index: 0;
+}
+
 .page-shell {
+  position: relative;
+  z-index: 1;
   width: min(1140px, calc(100% - 28px));
   margin: 0 auto;
   padding: 18px 0 72px;
@@ -1203,13 +1216,14 @@ textarea:focus-visible {
 .legal-section p,
 .legal-section li {
   max-width: 65ch;
+  line-height: 1.8;
 }
 
 /* Hero */
 .hero {
   position: relative;
   overflow: hidden;
-  padding: 86px 0 56px;
+  padding: 90px 0 64px;
 }
 
 .hero::before {
@@ -1230,7 +1244,8 @@ textarea:focus-visible {
 .hero h1 {
   max-width: 16ch;
   margin: 26px auto 28px;
-  letter-spacing: -0.06em;
+  letter-spacing: -0.065em;
+  line-height: 1.02;
 }
 
 .hero-text {
@@ -1249,13 +1264,15 @@ textarea:focus-visible {
 }
 
 .primary-button {
+  letter-spacing: 0.01em;
+  transform: translateZ(0);
   box-shadow:
     0 18px 40px rgba(23, 21, 17, 0.18),
     inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
 .primary-button:hover {
-  transform: translateY(-2px);
+  transform: translateY(-2px) scale(1.01);
   box-shadow:
     0 22px 46px rgba(23, 21, 17, 0.24),
     0 0 0 1px rgba(255, 255, 255, 0.04) inset;
@@ -1282,6 +1299,10 @@ textarea:focus-visible {
 .showcase-card {
   transform: translateY(0);
   animation: surface-rise 720ms ease both;
+}
+
+.showcase-card-main {
+  transform: translateY(-2px);
 }
 
 .showcase-card:nth-child(2) {
@@ -1325,32 +1346,32 @@ textarea:focus-visible {
 }
 
 .showcase-copy {
-  padding: 16px 16px 14px;
-  background: rgba(255, 248, 239, 0.86);
+  padding: 18px 18px 16px;
+  background: rgba(255, 248, 239, 0.9);
   backdrop-filter: blur(14px);
 }
 
 .showcase-card.tone-copper .showcase-copy {
-  background: rgba(255, 248, 239, 0.88);
+  background: rgba(255, 248, 239, 0.92);
 }
 
 .showcase-card.tone-ink .showcase-copy {
-  background: rgba(255, 248, 239, 0.84);
+  background: rgba(255, 248, 239, 0.9);
 }
 
 .showcase-card.tone-sand .showcase-copy {
-  background: rgba(255, 248, 239, 0.8);
+  background: rgba(255, 248, 239, 0.86);
 }
 
 /* Feature focus */
 .feature-card {
-  box-shadow: 0 18px 42px rgba(53, 39, 20, 0.08);
+  box-shadow: 0 12px 28px rgba(53, 39, 20, 0.08);
 }
 
 .feature-card:hover,
 .result-panel:hover {
   transform: translateY(-4px);
-  box-shadow: 0 24px 52px rgba(53, 39, 20, 0.12);
+  box-shadow: 0 20px 46px rgba(53, 39, 20, 0.12);
 }
 
 .feature-photo-card::after {
@@ -1386,7 +1407,7 @@ textarea:focus-visible {
 
 /* Result quietness */
 .result-panel {
-  padding: 22px;
+  padding: 24px;
   background: rgba(255, 252, 246, 0.9);
 }
 
@@ -1433,6 +1454,11 @@ textarea:focus-visible {
   border-color: rgba(191, 123, 66, 0.4);
   box-shadow: 0 0 0 3px rgba(191, 123, 66, 0.12);
   background: rgba(255, 255, 255, 0.96);
+}
+
+.intake-form input,
+.intake-form textarea {
+  transition: all 160ms ease;
 }
 
 .intake-form .primary-button {
@@ -1552,8 +1578,8 @@ textarea:focus-visible {
 }
 
 .legal-section {
-  margin-bottom: 24px;
-  padding: 24px;
+  margin-bottom: 28px;
+  padding: 28px;
   border-radius: 16px;
   background: rgba(255, 251, 245, 0.7);
   border: 1px solid var(--line);
@@ -1565,6 +1591,7 @@ textarea:focus-visible {
   font-family: "Manrope", sans-serif;
   font-size: 1.35rem;
   line-height: 1.2;
+  letter-spacing: -0.03em;
 }
 
 .legal-section p,
@@ -1589,6 +1616,18 @@ textarea:focus-visible {
 
 .legal-section li + li {
   margin-top: 10px;
+}
+
+.section-heading {
+  margin: 96px auto 40px;
+}
+
+.section-heading h2 {
+  letter-spacing: -0.05em;
+}
+
+.showcase-strip {
+  margin-top: 24px;
 }
 
 @keyframes surface-rise {
