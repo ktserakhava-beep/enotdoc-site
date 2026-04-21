@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>enotdoc Owner Dashboard</title>
+    <title>Внутренний Dashboard | enotdoc</title>
     <meta name="robots" content="noindex, nofollow" />
     <style>
       :root {
@@ -14,12 +14,11 @@
         --muted: #5f564a;
         --line: rgba(23, 21, 17, 0.08);
         --accent: #1f352a;
-        --accent-soft: rgba(31, 53, 42, 0.08);
-        --warning: #9a6a2d;
-        --warning-soft: rgba(154, 106, 45, 0.12);
         --success: #3f6b47;
-        --success-soft: rgba(63, 107, 71, 0.12);
+        --warning: #9a6a2d;
         --error: #96483c;
+        --success-soft: rgba(63, 107, 71, 0.12);
+        --warning-soft: rgba(154, 106, 45, 0.14);
         --error-soft: rgba(150, 72, 60, 0.12);
         --radius-xl: 24px;
         --radius-lg: 18px;
@@ -44,32 +43,16 @@
         color: inherit;
       }
 
-      button,
-      input {
-        font: inherit;
-      }
-
       .shell {
-        width: min(1200px, calc(100% - 32px));
+        width: min(1240px, calc(100% - 32px));
         margin: 36px auto 48px;
       }
 
-      .gate,
-      .dashboard {
+      .panel {
         border: 1px solid var(--line);
         border-radius: var(--radius-xl);
         background: var(--surface);
         box-shadow: var(--shadow);
-      }
-
-      .gate {
-        max-width: 440px;
-        margin: 12vh auto 0;
-        padding: 30px;
-      }
-
-      .dashboard {
-        display: none;
         padding: 28px;
       }
 
@@ -80,115 +63,98 @@
         margin: 0;
       }
 
-      .lead {
-        margin-top: 10px;
-        color: var(--muted);
-        line-height: 1.6;
-      }
-
-      .field {
-        width: 100%;
-        margin-top: 16px;
-        padding: 14px 16px;
-        border: 1px solid var(--line);
-        border-radius: 12px;
-        background: #fff;
-      }
-
-      .button,
-      .link-button {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 46px;
-        padding: 0 16px;
-        border-radius: 12px;
-        text-decoration: none;
-      }
-
-      .button {
-        width: 100%;
-        margin-top: 14px;
-        border: none;
-        background: var(--accent);
-        color: #fff;
-        cursor: pointer;
-      }
-
-      .error-text {
-        min-height: 20px;
-        margin-top: 10px;
-        color: var(--error);
-      }
-
       .header {
         display: flex;
         align-items: flex-start;
         justify-content: space-between;
-        gap: 16px;
-        margin-bottom: 24px;
+        gap: 18px;
+        margin-bottom: 26px;
       }
 
-      .subtle-note {
+      .lead {
+        margin-top: 10px;
+        color: var(--muted);
+        line-height: 1.6;
+        max-width: 760px;
+      }
+
+      .header-note {
         max-width: 360px;
         padding: 14px 16px;
         border: 1px solid var(--line);
-        border-radius: 14px;
+        border-radius: var(--radius-md);
         background: var(--surface-2);
         color: var(--muted);
-        line-height: 1.55;
+        line-height: 1.6;
         font-size: 0.94rem;
       }
 
-      .summary-grid,
-      .content-grid {
+      .gauges {
         display: grid;
         gap: 16px;
+        grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+        margin-bottom: 24px;
       }
 
-      .summary-grid {
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-        margin-bottom: 22px;
-      }
-
-      .content-grid {
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      }
-
-      .summary-card,
+      .gauge-card,
       .card {
         border: 1px solid var(--line);
         border-radius: var(--radius-lg);
         background: #fff;
       }
 
-      .summary-card {
-        padding: 18px;
+      .gauge-card {
+        padding: 18px 16px;
+        text-align: center;
       }
 
-      .summary-label {
+      .gauge-label {
         color: var(--muted);
         font-size: 0.82rem;
         text-transform: uppercase;
         letter-spacing: 0.08em;
       }
 
-      .summary-value {
-        margin-top: 8px;
-        font-size: 1.15rem;
+      .gauge {
+        --value: 0;
+        --tone: var(--warning);
+        width: 116px;
+        height: 116px;
+        margin: 14px auto 10px;
+        border-radius: 50%;
+        background:
+          radial-gradient(closest-side, #fffaf2 74%, transparent 75% 100%),
+          conic-gradient(var(--tone) calc(var(--value) * 1%), rgba(23, 21, 17, 0.08) 0);
+        display: grid;
+        place-items: center;
+      }
+
+      .gauge-inner {
+        display: grid;
+        gap: 2px;
+        place-items: center;
+      }
+
+      .gauge-score {
+        font-size: 1.4rem;
         font-weight: 700;
       }
 
-      .summary-value.ok {
-        color: var(--success);
+      .gauge-state {
+        font-size: 0.82rem;
+        color: var(--muted);
       }
 
-      .summary-value.warn {
-        color: var(--warning);
+      .gauge-caption {
+        color: var(--muted);
+        line-height: 1.5;
+        font-size: 0.92rem;
       }
 
-      .summary-value.fail {
-        color: var(--error);
+      .content-grid {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       }
 
       .card {
@@ -206,8 +172,7 @@
         line-height: 1.6;
       }
 
-      .check-list,
-      .meta-list {
+      .check-list {
         display: grid;
         gap: 10px;
       }
@@ -271,15 +236,16 @@
       }
 
       .link-button {
-        width: 100%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 46px;
+        padding: 0 16px;
+        border-radius: 12px;
         border: 1px solid var(--line);
         background: var(--surface-2);
         color: var(--text);
-      }
-
-      .mono {
-        font-family: Consolas, "Courier New", monospace;
-        font-size: 0.88rem;
+        text-decoration: none;
       }
 
       .foot-note {
@@ -301,46 +267,75 @@
   </head>
   <body>
     <div class="shell">
-      <section class="gate" id="dashboard-gate">
-        <h1>Owner Dashboard</h1>
-        <p class="lead">Введите пароль, чтобы открыть внутреннюю страницу владельца.</p>
-        <input class="field" id="dashboard-password" type="password" placeholder="Пароль" />
-        <button class="button" id="dashboard-login" type="button">Открыть dashboard</button>
-        <p class="error-text" id="dashboard-error"></p>
-      </section>
-
-      <main class="dashboard" id="dashboard-content">
+      <main class="panel">
         <div class="header">
           <div>
-            <h1>enotdoc Owner Dashboard</h1>
-            <p class="lead">Скрытая внутренняя панель контроля сайта, формы, SEO и инфраструктуры.</p>
+            <h1>Внутренний Dashboard enotdoc</h1>
+            <p class="lead">
+              Это скрытая внутренняя панель владельца сайта. Она показывает реальное состояние сайта,
+              формы, SEO-базы, аналитики и контура лидов без выдуманных данных.
+            </p>
           </div>
-          <div class="subtle-note">
-            Dashboard показывает только то, что можно проверить честно на статическом сайте без внешнего API.
-            Где реальных данных нет, это явно отмечено.
+          <div class="header-note">
+            Спидометры ниже считаются по реальным проверкам на статическом сайте. Там, где нет API-доступа,
+            dashboard честно показывает ограничения.
           </div>
         </div>
 
-        <section class="summary-grid">
-          <article class="summary-card">
-            <p class="summary-label">Site</p>
-            <p class="summary-value" id="summary-site">Checking...</p>
+        <section class="gauges">
+          <article class="gauge-card">
+            <p class="gauge-label">Сайт</p>
+            <div class="gauge" id="gauge-site">
+              <div class="gauge-inner">
+                <div class="gauge-score" id="score-site">0</div>
+                <div class="gauge-state" id="state-site">Проверка</div>
+              </div>
+            </div>
+            <p class="gauge-caption">Главная, privacy, robots и sitemap.</p>
           </article>
-          <article class="summary-card">
-            <p class="summary-label">Form</p>
-            <p class="summary-value" id="summary-form">Checking...</p>
+
+          <article class="gauge-card">
+            <p class="gauge-label">Форма</p>
+            <div class="gauge" id="gauge-form">
+              <div class="gauge-inner">
+                <div class="gauge-score" id="score-form">0</div>
+                <div class="gauge-state" id="state-form">Проверка</div>
+              </div>
+            </div>
+            <p class="gauge-caption">Наличие формы, endpoint и безопасный health-check.</p>
           </article>
-          <article class="summary-card">
-            <p class="summary-label">SEO Base</p>
-            <p class="summary-value" id="summary-seo">Checking...</p>
+
+          <article class="gauge-card">
+            <p class="gauge-label">SEO база</p>
+            <div class="gauge" id="gauge-seo">
+              <div class="gauge-inner">
+                <div class="gauge-score" id="score-seo">0</div>
+                <div class="gauge-state" id="state-seo">Проверка</div>
+              </div>
+            </div>
+            <p class="gauge-caption">robots, sitemap, canonical, title, description, noindex.</p>
           </article>
-          <article class="summary-card">
-            <p class="summary-label">Analytics</p>
-            <p class="summary-value" id="summary-analytics">Checking...</p>
+
+          <article class="gauge-card">
+            <p class="gauge-label">Аналитика</p>
+            <div class="gauge" id="gauge-analytics">
+              <div class="gauge-inner">
+                <div class="gauge-score" id="score-analytics">0</div>
+                <div class="gauge-state" id="state-analytics">Проверка</div>
+              </div>
+            </div>
+            <p class="gauge-caption">Метрика, GA4, Search Console и Webmaster метки.</p>
           </article>
-          <article class="summary-card">
-            <p class="summary-label">Leads Flow</p>
-            <p class="summary-value" id="summary-leads">Checking...</p>
+
+          <article class="gauge-card">
+            <p class="gauge-label">Контур лидов</p>
+            <div class="gauge" id="gauge-leads">
+              <div class="gauge-inner">
+                <div class="gauge-score" id="score-leads">0</div>
+                <div class="gauge-state" id="state-leads">Проверка</div>
+              </div>
+            </div>
+            <p class="gauge-caption">Форма, Apps Script, Telegram, Sheets/API слой.</p>
           </article>
         </section>
 
@@ -377,7 +372,7 @@
 
           <article class="card">
             <h2>Центр управления</h2>
-            <p class="card-intro">Быстрые ссылки на внешние кабинеты и инфраструктуру проекта.</p>
+            <p class="card-intro">Быстрые ссылки на кабинеты и инфраструктуру проекта.</p>
             <div class="actions">
               <a class="link-button" href="https://analytics.google.com/" target="_blank" rel="noopener noreferrer">Google Analytics</a>
               <a class="link-button" href="https://search.google.com/search-console" target="_blank" rel="noopener noreferrer">Google Search Console</a>
@@ -390,37 +385,20 @@
         </section>
 
         <div class="foot-note">
-          Защита на этой странице фронтендовая и минимальная. Это не настоящая серверная авторизация, а owner-only gate
-          для скрытого служебного URL. Для более безопасного варианта на Vercel лучше использовать middleware/basic auth
-          на edge или отдельный приватный backend/dashboard.
+          Эта страница не защищена сервером и держится только на скрытом URL. Для реальной приватности на Vercel лучше
+          потом добавить edge-защиту, middleware или отдельный приватный backend.
         </div>
       </main>
     </div>
 
     <script>
       (() => {
-        // Owner-only access gate. Change this value manually after deploy.
-        // This is not real server-side protection.
-        const DASHBOARD_PASSWORD = "88917051";
-
         const HOMEPAGE_URL = "./index.html";
         const PRIVACY_URL = "./privacy.html";
         const ROBOTS_URL = "./robots.txt";
         const SITEMAP_URL = "./sitemap.xml";
-
-        const gate = document.getElementById("dashboard-gate");
-        const content = document.getElementById("dashboard-content");
-        const input = document.getElementById("dashboard-password");
-        const login = document.getElementById("dashboard-login");
-        const error = document.getElementById("dashboard-error");
-
-        const summaryNodes = {
-          site: document.getElementById("summary-site"),
-          form: document.getElementById("summary-form"),
-          seo: document.getElementById("summary-seo"),
-          analytics: document.getElementById("summary-analytics"),
-          leads: document.getElementById("summary-leads"),
-        };
+        const FORM_ENDPOINT =
+          "https://script.google.com/macros/s/AKfycby5GkFFej0Zdh9Pj6RpmL_pFXWxPoLOu_FtoPluKFMV4xn2uXPmwuxm0rcQaWfTPN5OLQ/exec";
 
         const sections = {
           site: document.getElementById("site-checks"),
@@ -428,6 +406,34 @@
           seo: document.getElementById("seo-checks"),
           analytics: document.getElementById("analytics-checks"),
           leads: document.getElementById("leads-checks"),
+        };
+
+        const gauges = {
+          site: {
+            root: document.getElementById("gauge-site"),
+            score: document.getElementById("score-site"),
+            state: document.getElementById("state-site"),
+          },
+          form: {
+            root: document.getElementById("gauge-form"),
+            score: document.getElementById("score-form"),
+            state: document.getElementById("state-form"),
+          },
+          seo: {
+            root: document.getElementById("gauge-seo"),
+            score: document.getElementById("score-seo"),
+            state: document.getElementById("state-seo"),
+          },
+          analytics: {
+            root: document.getElementById("gauge-analytics"),
+            score: document.getElementById("score-analytics"),
+            state: document.getElementById("state-analytics"),
+          },
+          leads: {
+            root: document.getElementById("gauge-leads"),
+            score: document.getElementById("score-leads"),
+            state: document.getElementById("state-leads"),
+          },
         };
 
         const escapeHtml = (value) =>
@@ -440,9 +446,9 @@
 
         const pillLabel = (status) => {
           if (status === "ok") return "OK";
-          if (status === "warn") return "Warning";
-          if (status === "fail") return "Problem";
-          return "Unknown";
+          if (status === "warn") return "Внимание";
+          if (status === "fail") return "Проблема";
+          return "Нет данных";
         };
 
         const addItem = (root, label, status, extra) => {
@@ -456,11 +462,6 @@
             <span class="status-pill ${status}">${pillLabel(status)}</span>
           `;
           root.appendChild(item);
-        };
-
-        const setSummary = (node, tone, text) => {
-          node.className = `summary-value ${tone}`;
-          node.textContent = text;
         };
 
         const fetchText = async (url) => {
@@ -489,6 +490,7 @@
               method: "GET",
               cache: "no-store",
             });
+
             return { ok: fallback.ok, status: fallback.status, mode: "GET" };
           }
         };
@@ -509,11 +511,19 @@
           return match ? match[3] : "";
         };
 
-        const classifySeoSummary = (checks) => {
-          const failures = checks.filter((item) => item === false).length;
-          if (failures === 0) return { tone: "ok", text: "OK" };
-          if (failures <= 2) return { tone: "warn", text: "Partial" };
-          return { tone: "fail", text: "Missing" };
+        const getTone = (score) => {
+          if (score >= 85) return { tone: "var(--success)", label: "Хорошо" };
+          if (score >= 60) return { tone: "var(--warning)", label: "Средне" };
+          return { tone: "var(--error)", label: "Слабо" };
+        };
+
+        const setGauge = (key, score) => {
+          const rounded = Math.max(0, Math.min(100, Math.round(score)));
+          const tone = getTone(rounded);
+          gauges[key].root.style.setProperty("--value", rounded);
+          gauges[key].root.style.setProperty("--tone", tone.tone);
+          gauges[key].score.textContent = rounded;
+          gauges[key].state.textContent = tone.label;
         };
 
         const runDashboard = async () => {
@@ -522,7 +532,7 @@
             fetchHead(PRIVACY_URL),
             fetchText(ROBOTS_URL),
             fetchText(SITEMAP_URL),
-            fetchHead("https://script.google.com/macros/s/AKfycby5GkFFej0Zdh9Pj6RpmL_pFXWxPoLOu_FtoPluKFMV4xn2uXPmwuxm0rcQaWfTPN5OLQ/exec"),
+            fetchHead(FORM_ENDPOINT),
           ]);
 
           const home = homeDoc.status === "fulfilled" ? homeDoc.value : { ok: false, status: 0, text: "" };
@@ -534,6 +544,7 @@
           const homepageHasForm =
             /<form[\s\S]*id=(["'])intake-form\1/i.test(home.text) &&
             /script\.google\.com\/macros\/s\//i.test(home.text);
+
           const analyticsInstalled = {
             yandexMetrika:
               /mc\.yandex\.ru\/metrika\/tag\.js/i.test(home.text) &&
@@ -558,14 +569,6 @@
           addItem(sections.site, "robots.txt", robotsAvailable ? "ok" : "fail", robotsAvailable ? `HTTP ${robots.status}` : "robots.txt не найден или пуст");
           addItem(sections.site, "sitemap.xml", sitemapAvailable ? "ok" : "fail", sitemapAvailable ? `HTTP ${sitemap.status}` : "sitemap.xml не найден или невалиден");
 
-          if (home.ok && privacy.ok && robotsAvailable && sitemapAvailable) {
-            setSummary(summaryNodes.site, "ok", "OK");
-          } else if (home.ok) {
-            setSummary(summaryNodes.site, "warn", "Partial");
-          } else {
-            setSummary(summaryNodes.site, "fail", "Problem");
-          }
-
           addItem(sections.form, "Форма найдена на лендинге", homepageHasForm ? "ok" : "fail", homepageHasForm ? "Форма и endpoint присутствуют в HTML" : "Форма или endpoint не найдены");
           addItem(
             sections.form,
@@ -580,14 +583,6 @@
             "Не выполняется специально, чтобы не засорять рабочий контур лидов"
           );
 
-          if (homepageHasForm && formStatus.ok) {
-            setSummary(summaryNodes.form, "ok", "OK");
-          } else if (homepageHasForm) {
-            setSummary(summaryNodes.form, "warn", "Warning");
-          } else {
-            setSummary(summaryNodes.form, "fail", "Problem");
-          }
-
           addItem(sections.seo, "robots.txt есть", robotsAvailable ? "ok" : "fail", robotsAvailable ? "Файл доступен" : "Файл отсутствует");
           addItem(sections.seo, "sitemap.xml есть", sitemapAvailable ? "ok" : "fail", sitemapAvailable ? "Файл доступен" : "Файл отсутствует");
           addItem(sections.seo, "canonical найден", canonicalFound ? "ok" : "fail");
@@ -600,52 +595,23 @@
             noindexFound ? `Найдено: ${robotsMetaContent}` : "На главной noindex не найден"
           );
 
-          const seoSummary = classifySeoSummary([
-            robotsAvailable,
-            sitemapAvailable,
-            canonicalFound,
-            titleFound,
-            descriptionFound,
-            !noindexFound,
-          ]);
-          setSummary(summaryNodes.seo, seoSummary.tone, seoSummary.text);
-
           addItem(sections.analytics, "Яндекс.Метрика в коде", analyticsInstalled.yandexMetrika ? "ok" : "fail");
           addItem(sections.analytics, "GA4 в коде", analyticsInstalled.ga4 ? "ok" : "fail");
           addItem(sections.analytics, "Google Search Console meta", analyticsInstalled.gscMeta ? "ok" : "warn", analyticsInstalled.gscMeta ? "Meta verification tag найден" : "Meta verification tag не найден");
-          addItem(
-            sections.analytics,
-            "Yandex Webmaster meta",
-            analyticsInstalled.yandexWebmasterMeta ? "ok" : "warn",
-            analyticsInstalled.yandexWebmasterMeta ? "Meta verification tag найден" : "Meta verification tag не найден"
-          );
+          addItem(sections.analytics, "Yandex Webmaster meta", analyticsInstalled.yandexWebmasterMeta ? "ok" : "warn", analyticsInstalled.yandexWebmasterMeta ? "Meta verification tag найден" : "Meta verification tag не найден");
           addItem(
             sections.analytics,
             "Реальные цифры трафика",
             "neutral",
-            "На статической странице без API не подтягиваются. Открываются по кнопкам во внешних кабинетах."
+            "Без API не подтягиваются. Открываются по кнопкам во внешних кабинетах."
           );
-
-          const analyticsChecks = [
-            analyticsInstalled.yandexMetrika,
-            analyticsInstalled.ga4,
-            analyticsInstalled.gscMeta,
-            analyticsInstalled.yandexWebmasterMeta,
-          ];
-          if (analyticsChecks.every(Boolean)) {
-            setSummary(summaryNodes.analytics, "ok", "OK");
-          } else if (analyticsChecks.some(Boolean)) {
-            setSummary(summaryNodes.analytics, "warn", "Partial");
-          } else {
-            setSummary(summaryNodes.analytics, "fail", "Missing");
-          }
 
           addItem(sections.leads, "Форма -> Apps Script", homepageHasForm ? "ok" : "fail", homepageHasForm ? "Контур формы найден в коде" : "Контур не обнаружен");
           addItem(
             sections.leads,
             "Telegram-уведомления",
             "ok",
-            "По вашему подтверждению лиды доходят в Telegram. Из dashboard это не верифицируется без отдельного API."
+            "По вашей проверке лиды доходят. Из dashboard это не подтверждается без отдельного API."
           );
           addItem(
             sections.leads,
@@ -654,36 +620,25 @@
             "Данные не подтягиваются без отдельного read API из Apps Script или Sheets."
           );
 
-          if (homepageHasForm) {
-            setSummary(summaryNodes.leads, "warn", "Partial");
-          } else {
-            setSummary(summaryNodes.leads, "warn", "Unknown");
-          }
+          const siteScore = [home.ok, privacy.ok, robotsAvailable, sitemapAvailable].filter(Boolean).length * 25;
+          const formScore = (homepageHasForm ? 45 : 0) + (formStatus.ok ? 35 : 0) + 20;
+          const seoScore = [robotsAvailable, sitemapAvailable, canonicalFound, titleFound, descriptionFound, !noindexFound].filter(Boolean).length * (100 / 6);
+          const analyticsScore = [analyticsInstalled.yandexMetrika, analyticsInstalled.ga4, analyticsInstalled.gscMeta, analyticsInstalled.yandexWebmasterMeta].filter(Boolean).length * 25;
+          const leadsScore = (homepageHasForm ? 40 : 0) + 30 + 10;
+
+          setGauge("site", siteScore);
+          setGauge("form", formScore);
+          setGauge("seo", seoScore);
+          setGauge("analytics", analyticsScore);
+          setGauge("leads", leadsScore);
         };
 
-        const unlock = () => {
-          if (input.value !== DASHBOARD_PASSWORD) {
-            error.textContent = "Неверный пароль.";
-            input.focus();
-            return;
-          }
-
-          gate.style.display = "none";
-          content.style.display = "block";
-          runDashboard().catch(() => {
-            setSummary(summaryNodes.site, "fail", "Problem");
-            setSummary(summaryNodes.form, "warn", "Unknown");
-            setSummary(summaryNodes.seo, "warn", "Unknown");
-            setSummary(summaryNodes.analytics, "warn", "Unknown");
-            setSummary(summaryNodes.leads, "warn", "Unknown");
-          });
-        };
-
-        login.addEventListener("click", unlock);
-        input.addEventListener("keydown", (event) => {
-          if (event.key === "Enter") {
-            unlock();
-          }
+        runDashboard().catch(() => {
+          setGauge("site", 0);
+          setGauge("form", 0);
+          setGauge("seo", 0);
+          setGauge("analytics", 0);
+          setGauge("leads", 0);
         });
       })();
     </script>
