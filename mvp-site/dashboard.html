@@ -258,6 +258,19 @@
         background: rgba(255, 255, 255, 0.65);
       }
 
+      .lead-summary {
+        padding: 14px 16px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: var(--surface-2);
+        color: var(--muted);
+        line-height: 1.65;
+      }
+
+      .lead-summary strong {
+        color: var(--text);
+      }
+
       @media (max-width: 760px) {
         .header {
           flex-direction: column;
@@ -367,6 +380,8 @@
           <article class="card">
             <h2>Лиды</h2>
             <p class="card-intro">Статус контура захвата лидов и честные ограничения текущего статического сайта.</p>
+            <div class="lead-summary" id="lead-summary">Проверяем данные по лидам...</div>
+            <div style="height: 10px;"></div>
             <div class="check-list" id="leads-checks"></div>
           </article>
 
@@ -399,6 +414,8 @@
         const SITEMAP_URL = "./sitemap.xml";
         const FORM_ENDPOINT =
           "https://script.google.com/macros/s/AKfycby5GkFFej0Zdh9Pj6RpmL_pFXWxPoLOu_FtoPluKFMV4xn2uXPmwuxm0rcQaWfTPN5OLQ/exec";
+        const FORM_HEALTH_URL = FORM_ENDPOINT + "?mode=health";
+        const LEADS_URL = FORM_ENDPOINT + "?mode=leads";
 
         const sections = {
           site: document.getElementById("site-checks"),
@@ -435,6 +452,8 @@
             state: document.getElementById("state-leads"),
           },
         };
+
+        const leadSummary = document.getElementById("lead-summary");
 
         const escapeHtml = (value) =>
           String(value)
@@ -495,6 +514,27 @@
           }
         };
 
+        const fetchJson = async (url) => {
+          const response = await fetch(url, {
+            method: "GET",
+            cache: "no-store",
+          });
+
+          let data = null;
+
+          try {
+            data = await response.json();
+          } catch {
+            data = null;
+          }
+
+          return {
+            ok: response.ok,
+            status: response.status,
+            data: data,
+          };
+        };
+
         const detectMetaByName = (html, name) => {
           const pattern = new RegExp(
             `<meta\\s+[^>]*name=(["'])${name}\\1[^>]*content=(["'])([\\s\\S]*?)\\2[^>]*>`,
@@ -527,19 +567,21 @@
         };
 
         const runDashboard = async () => {
-          const [homeDoc, privacyDoc, robotsDoc, sitemapDoc, formProbe] = await Promise.allSettled([
+          const [homeDoc, privacyDoc, robotsDoc, sitemapDoc, formProbe, leadsProbe] = await Promise.allSettled([
             fetchText(HOMEPAGE_URL),
             fetchHead(PRIVACY_URL),
             fetchText(ROBOTS_URL),
             fetchText(SITEMAP_URL),
-            fetchHead(FORM_ENDPOINT),
+            fetchJson(FORM_HEALTH_URL),
+            fetchJson(LEADS_URL),
           ]);
 
           const home = homeDoc.status === "fulfilled" ? homeDoc.value : { ok: false, status: 0, text: "" };
           const privacy = privacyDoc.status === "fulfilled" ? privacyDoc.value : { ok: false, status: 0 };
           const robots = robotsDoc.status === "fulfilled" ? robotsDoc.value : { ok: false, status: 0, text: "" };
           const sitemap = sitemapDoc.status === "fulfilled" ? sitemapDoc.value : { ok: false, status: 0, text: "" };
-          const formStatus = formProbe.status === "fulfilled" ? formProbe.value : { ok: false, status: 0, mode: "HEAD" };
+          const formStatus = formProbe.status === "fulfilled" ? formProbe.value : { ok: false, status: 0, data: null };
+          const leadsStatus = leadsProbe.status === "fulfilled" ? leadsProbe.value : { ok: false, status: 0, data: null };
 
           const homepageHasForm =
             /<form[\s\S]*id=(["'])intake-form\1/i.test(home.text) &&
@@ -572,9 +614,11 @@
           addItem(sections.form, "Форма найдена на лендинге", homepageHasForm ? "ok" : "fail", homepageHasForm ? "Форма и endpoint присутствуют в HTML" : "Форма или endpoint не найдены");
           addItem(
             sections.form,
-            "Endpoint формы отвечает",
-            formStatus.ok ? "ok" : "warn",
-            formStatus.status ? `HTTP ${formStatus.status} (${formStatus.mode})` : "Безопасный check не дал подтверждения"
+            "Health-check формы",
+            formStatus.ok && formStatus.data && formStatus.data.ok ? "ok" : "warn",
+            formStatus.ok && formStatus.data && formStatus.data.ok
+              ? `HTTP ${formStatus.status}, mode=health`
+              : "Health-check не дал уверенного подтверждения"
           );
           addItem(
             sections.form,
@@ -616,15 +660,47 @@
           addItem(
             sections.leads,
             "Google Sheets / последние лиды",
-            "neutral",
-            "Данные не подтягиваются без отдельного read API из Apps Script или Sheets."
+            leadsStatus.ok && leadsStatus.data && leadsStatus.data.ok ? "ok" : "warn",
+            leadsStatus.ok && leadsStatus.data && leadsStatus.data.ok
+              ? `Получены данные по mode=leads, всего лидов: ${leadsStatus.data.count || 0}`
+              : "Данные лидов не подтянулись через read API"
           );
 
+          if (leadsStatus.ok && leadsStatus.data && leadsStatus.data.ok) {
+            const latestLeads = Array.isArray(leadsStatus.data.latestLeads) ? leadsStatus.data.latestLeads : [];
+            const preview = latestLeads
+              .slice(0, 3)
+              .map((lead) => {
+                const company = safeText_(lead.company);
+                const source = safeText_(lead.source);
+                const createdAt = safeText_(lead.createdAt);
+                return `${company || "Без компании"} · ${source || "website"} · ${createdAt || "без даты"}`;
+              })
+              .join("\n");
+
+            leadSummary.innerHTML =
+              "<strong>Всего лидов:</strong> " + escapeHtml(leadsStatus.data.count || 0) + "<br />" +
+              "<strong>Последний лид:</strong> " + escapeHtml(leadsStatus.data.lastLeadAt || "нет данных") + "<br />" +
+              "<strong>Последние заявки:</strong><br />" +
+              (preview ? `<span style="white-space: pre-line;">${escapeHtml(preview)}</span>` : "нет данных");
+          } else {
+            leadSummary.innerHTML =
+              "Dashboard пока не получил данные из read API. " +
+              "Проверь, что опубликована актуальная версия Apps Script с <strong>?mode=leads</strong>.";
+          }
+
           const siteScore = [home.ok, privacy.ok, robotsAvailable, sitemapAvailable].filter(Boolean).length * 25;
-          const formScore = (homepageHasForm ? 45 : 0) + (formStatus.ok ? 35 : 0) + 20;
+          const formScore =
+            (homepageHasForm ? 45 : 0) +
+            (formStatus.ok && formStatus.data && formStatus.data.ok ? 45 : 0) +
+            10;
           const seoScore = [robotsAvailable, sitemapAvailable, canonicalFound, titleFound, descriptionFound, !noindexFound].filter(Boolean).length * (100 / 6);
           const analyticsScore = [analyticsInstalled.yandexMetrika, analyticsInstalled.ga4, analyticsInstalled.gscMeta, analyticsInstalled.yandexWebmasterMeta].filter(Boolean).length * 25;
-          const leadsScore = (homepageHasForm ? 40 : 0) + 30 + 10;
+          const leadsScore =
+            (homepageHasForm ? 30 : 0) +
+            (formStatus.ok && formStatus.data && formStatus.data.ok ? 20 : 0) +
+            20 +
+            (leadsStatus.ok && leadsStatus.data && leadsStatus.data.ok ? 30 : 0);
 
           setGauge("site", siteScore);
           setGauge("form", formScore);
@@ -640,6 +716,10 @@
           setGauge("analytics", 0);
           setGauge("leads", 0);
         });
+
+        function safeText_(value) {
+          return String(value || "").trim();
+        }
       })();
     </script>
   </body>
