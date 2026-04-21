@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="ru">
   <head>
-    <!-- Yandex.Metrika counter -->
+    <!-- Yandex.Metrika counter: replace YANDEX_METRIKA_ID if you need another counter -->
     <script type="text/javascript">
+      window.YANDEX_METRIKA_ID = 108501289;
+
       (function (m, e, t, r, i, k, a) {
         m[i] =
           m[i] ||
@@ -20,17 +22,14 @@
         k.async = 1;
         k.src = r;
         a.parentNode.insertBefore(k, a);
-      })(window, document, "script", "https://mc.yandex.ru/metrika/tag.js?id=108501289", "ym");
+      })(window, document, "script", "https://mc.yandex.ru/metrika/tag.js?id=" + window.YANDEX_METRIKA_ID, "ym");
 
-      ym(108501289, "init", {
-        ssr: true,
+      ym(window.YANDEX_METRIKA_ID, "init", {
         webvisor: true,
         clickmap: true,
-        ecommerce: "dataLayer",
-        referrer: document.referrer,
-        url: location.href,
-        accurateTrackBounce: true,
         trackLinks: true,
+        accurateTrackBounce: true,
+        trackHash: true,
       });
     </script>
     <noscript>
@@ -39,6 +38,19 @@
       </div>
     </noscript>
     <!-- /Yandex.Metrika counter -->
+
+    <!-- Google Analytics 4: replace MEASUREMENT_ID with your real GA4 ID, for example G-XXXXXXXXXX -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=MEASUREMENT_ID"></script>
+    <script>
+      window.GA4_MEASUREMENT_ID = "MEASUREMENT_ID";
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      window.gtag = gtag;
+      gtag("js", new Date());
+      gtag("config", window.GA4_MEASUREMENT_ID, { send_page_view: true });
+    </script>
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -54,6 +66,8 @@
     />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="ru_BY" />
+    <meta name="google-site-verification" content="GOOGLE_SEARCH_CONSOLE_VERIFICATION_TOKEN" />
+    <meta name="yandex-verification" content="YANDEX_WEBMASTER_VERIFICATION_TOKEN" />
     <link rel="canonical" href="https://enotdoc.vercel.app/" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -622,39 +636,6 @@
       </footer>
     </div>
 
-    <div class="site-chat">
-      <button
-        class="site-chat-toggle"
-        id="site-chat-toggle"
-        type="button"
-        aria-expanded="false"
-        aria-controls="site-chat-window"
-        aria-label="Открыть чат"
-      >
-        <span class="site-chat-toggle-icon" aria-hidden="true">···</span>
-      </button>
-
-      <section class="site-chat-window" id="site-chat-window" hidden aria-label="Чат">
-        <div class="site-chat-head">
-          <p class="site-chat-title">Быстрый чат</p>
-          <button class="site-chat-close" id="site-chat-close" type="button" aria-label="Закрыть чат">×</button>
-        </div>
-
-        <div class="site-chat-messages" id="site-chat-messages"></div>
-
-        <div class="site-chat-form">
-          <textarea
-            id="site-chat-input"
-            class="site-chat-input"
-            rows="3"
-            placeholder="Опишите ситуацию в 1–2 предложениях"
-          ></textarea>
-          <button class="primary-button site-chat-submit" id="site-chat-submit" type="button">Отправить</button>
-          <button class="primary-button site-chat-submit" id="site-chat-telegram" type="button" hidden>Перейти в Telegram</button>
-        </div>
-      </section>
-    </div>
-
     <script>
       (() => {
         const endpoint =
@@ -687,7 +668,7 @@
 
         const trackGoal = (goal) => {
           if (typeof ym === "function") {
-            ym(108501289, "reachGoal", goal);
+            ym(window.YANDEX_METRIKA_ID, "reachGoal", goal);
           }
         };
 
@@ -836,7 +817,15 @@
             }
 
             if (typeof ym === "function") {
-              ym(108501289, "reachGoal", "lead");
+              ym(window.YANDEX_METRIKA_ID, "reachGoal", "lead");
+            }
+
+            if (typeof gtag === "function" && window.GA4_MEASUREMENT_ID !== "MEASUREMENT_ID") {
+              gtag("event", "form_submit", {
+                event_category: "lead",
+                event_label: "intake_form",
+                page_location: window.location.href,
+              });
             }
 
             sessionFlags.leadSent = true;
@@ -869,158 +858,6 @@
             button.textContent = "Отправить заявку";
           }
         });
-      })();
-    </script>
-
-    <script>
-      (() => {
-        const TELEGRAM_BOT_USERNAME = "EnotDoc_Assistant_Bot";
-        const STORAGE_KEY = "site_chat_state_v1";
-        const DEFAULT_MESSAGE = "Коротко опишите ситуацию с документами — посмотрю и скажу, с чего начать";
-        const FOLLOWUP_MESSAGE = "Открою чат, чтобы продолжить и задать пару уточнений";
-
-        const toggleButton = document.getElementById("site-chat-toggle");
-        const closeButton = document.getElementById("site-chat-close");
-        const chatWindow = document.getElementById("site-chat-window");
-        const messagesRoot = document.getElementById("site-chat-messages");
-        const input = document.getElementById("site-chat-input");
-        const submit = document.getElementById("site-chat-submit");
-        const telegramButton = document.getElementById("site-chat-telegram");
-
-        if (!toggleButton || !closeButton || !chatWindow || !messagesRoot || !input || !submit || !telegramButton) return;
-
-        const readState = () => {
-          try {
-            return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
-          } catch {
-            return {};
-          }
-        };
-
-        const state = {
-          isOpen: false,
-          hasSent: false,
-          lastMessage: "",
-          messages: [],
-          ...readState(),
-        };
-
-        if (!Array.isArray(state.messages)) {
-          state.messages = [];
-        }
-
-        if (!state.hasSent && state.messages.length === 0) {
-          state.messages.push({ role: "assistant", text: DEFAULT_MESSAGE });
-        }
-
-        const persistState = () => {
-          localStorage.setItem(
-            STORAGE_KEY,
-            JSON.stringify({
-              isOpen: state.isOpen,
-              hasSent: state.hasSent,
-              messages: state.messages,
-            })
-          );
-        };
-
-        const renderMessages = () => {
-          messagesRoot.innerHTML = "";
-
-          state.messages.forEach((message) => {
-            const item = document.createElement("div");
-            item.className = `site-chat-message site-chat-message-${message.role}`;
-            item.textContent = message.text;
-            messagesRoot.appendChild(item);
-          });
-
-          messagesRoot.scrollTop = messagesRoot.scrollHeight;
-        };
-
-        function toggleChat(forceOpen) {
-          state.isOpen = typeof forceOpen === "boolean" ? forceOpen : !state.isOpen;
-          chatWindow.hidden = !state.isOpen;
-          toggleButton.setAttribute("aria-expanded", String(state.isOpen));
-          persistState();
-
-          if (state.isOpen) {
-            window.setTimeout(() => input.focus(), 40);
-          }
-        }
-
-        function getSiteAssistantReply(text) {
-          const t = String(text || "").trim().toLowerCase();
-
-          if (/привет|здравствуйте|добрый|hello|hi/.test(t)) {
-            return "Здравствуйте. Коротко опишите ситуацию с документами по отходам — подскажу, с чего начать.";
-          }
-
-          if (/договор|подрядчик|учет|учёт|отход|отчет|отчёт|проверк|акт|инструкц/.test(t)) {
-            return "Поняла общий контекст. Уточню коротко: есть ли сейчас учет отходов и действующие договоры с подрядчиками?";
-          }
-
-          return "Опишите ситуацию в 1–2 предложениях — я помогу понять, с чего лучше начать.";
-        }
-
-function getSiteAssistantReplyUnused(text) {
-  const t = String(text || "").trim().toLowerCase();
-
-  if (/привет|здравствуйте|здравствуй|добрый|hello|hi/.test(t)) {
-    return "Здравствуйте. Коротко опишите ситуацию с документами по отходам — подскажу, с чего начать.";
-  }
-
-  if (/договор|подрядчик|учет|учёт|отход|отходы|отчет|отчёт|проверк|акт/.test(t)) {
-    return "Поняла общий контекст. Уточню: есть ли сейчас учет отходов и действующие договоры с подрядчиками?";
-  }
-
-  return "Опишите ситуацию в 1–2 предложениях — я помогу понять, с чего начать.";
-}
-
-        function sendToTelegram() {
-          const text = input.value.trim();
-          if (!text) return;
-
-          state.messages.push({ role: "user", text });
-          state.messages.push({
-  role: "assistant",
-  text: getSiteAssistantReply(text),
-});
-          state.messages.push({
-            role: "assistant",
-            text: "Чтобы не потерять детали, давайте продолжим в Telegram — там удобнее.\n\nЯ уже перенесу ваш вопрос.",
-          });
-          state.hasSent = true;
-          state.lastMessage = text;
-          renderMessages();
-          persistState();
-
-          input.value = "";
-          telegramButton.hidden = false;
-        }
-
-        telegramButton.addEventListener("click", () => {
-          const userMessage = String(state.lastMessage || "").trim();
-          if (!userMessage) return;
-
-          const encoded = encodeURIComponent(userMessage);
-
-window.open(`https://t.me/${TELEGRAM_BOT_USERNAME}?start=${encoded}`, "_blank", "noopener");
-        });
-
-        toggleButton.addEventListener("click", () => toggleChat());
-        closeButton.addEventListener("click", () => toggleChat(false));
-        submit.addEventListener("click", sendToTelegram);
-        input.addEventListener("keydown", (event) => {
-          if ((event.ctrlKey || event.metaKey) && event.key === "Enter") {
-            sendToTelegram();
-          }
-        });
-
-        renderMessages();
-        toggleChat(Boolean(state.isOpen));
-
-        window.toggleChat = toggleChat;
-        window.sendToTelegram = sendToTelegram;
       })();
     </script>
   </body>

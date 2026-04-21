@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>enotdoc Dashboard</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <style>
+      :root {
+        --bg: #f5eee3;
+        --surface: #fffaf2;
+        --text: #171511;
+        --muted: #5f564a;
+        --line: rgba(23, 21, 17, 0.08);
+        --accent: #1f352a;
+        --success: #3f6b47;
+        --error: #96483c;
+        --radius: 18px;
+        --shadow: 0 18px 40px rgba(53, 39, 20, 0.08);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Arial, sans-serif;
+        color: var(--text);
+        background: linear-gradient(180deg, #f8f2e8 0%, #f3eadc 100%);
+      }
+
+      .shell {
+        width: min(980px, calc(100% - 32px));
+        margin: 40px auto;
+      }
+
+      .gate,
+      .dashboard {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+      }
+
+      .gate {
+        max-width: 420px;
+        margin: 12vh auto 0;
+        padding: 28px;
+      }
+
+      .dashboard {
+        display: none;
+        padding: 28px;
+      }
+
+      h1,
+      h2,
+      p {
+        margin: 0;
+      }
+
+      .lead {
+        margin-top: 10px;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .field,
+      .button,
+      .link-button {
+        width: 100%;
+        border-radius: 12px;
+        font: inherit;
+      }
+
+      .field {
+        margin-top: 16px;
+        padding: 14px 16px;
+        border: 1px solid var(--line);
+        background: #fff;
+      }
+
+      .button,
+      .link-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 46px;
+        padding: 0 16px;
+        text-decoration: none;
+        cursor: pointer;
+        border: 1px solid transparent;
+      }
+
+      .button {
+        margin-top: 14px;
+        background: var(--accent);
+        color: #fff;
+      }
+
+      .error-text {
+        min-height: 20px;
+        margin-top: 10px;
+        color: var(--error);
+      }
+
+      .header {
+        margin-bottom: 24px;
+      }
+
+      .grid {
+        display: grid;
+        gap: 18px;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .card {
+        padding: 20px;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: #fff;
+      }
+
+      .card h2 {
+        font-size: 1.05rem;
+        margin-bottom: 8px;
+      }
+
+      .card p {
+        color: var(--muted);
+        line-height: 1.6;
+        margin-bottom: 14px;
+      }
+
+      .actions {
+        display: grid;
+        gap: 10px;
+      }
+
+      .link-button {
+        background: #f4ecdf;
+        color: var(--text);
+        border-color: var(--line);
+      }
+
+      .status {
+        font-weight: 600;
+      }
+
+      .status.ok {
+        color: var(--success);
+      }
+
+      .status.fail {
+        color: var(--error);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <section class="gate" id="dashboard-gate">
+        <h1>enotdoc Dashboard</h1>
+        <p class="lead">Введите пароль, чтобы открыть внутреннюю страницу.</p>
+        <input class="field" id="dashboard-password" type="password" placeholder="Пароль" />
+        <button class="button" id="dashboard-login" type="button">Открыть dashboard</button>
+        <p class="error-text" id="dashboard-error"></p>
+      </section>
+
+      <main class="dashboard" id="dashboard-content">
+        <div class="header">
+          <h1>enotdoc Dashboard</h1>
+          <p class="lead">Внутренний обзор аналитики, SEO и состояния сайта.</p>
+        </div>
+
+        <div class="grid">
+          <section class="card">
+            <h2>Трафик</h2>
+            <p>Быстрый доступ к основным системам аналитики.</p>
+            <div class="actions">
+              <a class="link-button" href="https://analytics.google.com/" target="_blank" rel="noopener noreferrer">Открыть Google Analytics</a>
+              <a class="link-button" href="https://metrika.yandex.ru/" target="_blank" rel="noopener noreferrer">Открыть Яндекс.Метрику</a>
+            </div>
+          </section>
+
+          <section class="card">
+            <h2>SEO</h2>
+            <p>Быстрый доступ к консолям вебмастеров.</p>
+            <div class="actions">
+              <a class="link-button" href="https://search.google.com/search-console" target="_blank" rel="noopener noreferrer">Google Search Console</a>
+              <a class="link-button" href="https://webmaster.yandex.com/" target="_blank" rel="noopener noreferrer">Yandex Webmaster</a>
+            </div>
+          </section>
+
+          <section class="card">
+            <h2>Лиды</h2>
+            <p>Лиды приходят через форму и Telegram.</p>
+            <!-- Later: connect a real leads API or Google Sheets/Telegram bot endpoint here. -->
+          </section>
+
+          <section class="card">
+            <h2>Статус сайта</h2>
+            <p>Проверка доступности главной страницы.</p>
+            <p class="status" id="site-health">Проверяем...</p>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      (() => {
+        const DASHBOARD_PASSWORD = "change-me";
+        const gate = document.getElementById("dashboard-gate");
+        const content = document.getElementById("dashboard-content");
+        const input = document.getElementById("dashboard-password");
+        const login = document.getElementById("dashboard-login");
+        const error = document.getElementById("dashboard-error");
+        const health = document.getElementById("site-health");
+
+        const runHealthCheck = async () => {
+          try {
+            const response = await fetch("./index.html", {
+              method: "GET",
+              cache: "no-store",
+            });
+
+            if (!response.ok) {
+              throw new Error("unavailable");
+            }
+
+            health.textContent = "✅ Сайт доступен";
+            health.className = "status ok";
+          } catch {
+            health.textContent = "❌ Ошибка";
+            health.className = "status fail";
+          }
+        };
+
+        const unlock = () => {
+          if (input.value !== DASHBOARD_PASSWORD) {
+            error.textContent = "Неверный пароль.";
+            input.focus();
+            return;
+          }
+
+          gate.style.display = "none";
+          content.style.display = "block";
+          runHealthCheck();
+        };
+
+        login.addEventListener("click", unlock);
+        input.addEventListener("keydown", (event) => {
+          if (event.key === "Enter") {
+            unlock();
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>
