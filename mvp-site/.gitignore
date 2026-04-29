@@ -1,0 +1,15 @@
+.vercel/
+node_modules/
+dist/
+build/
+coverage/
+.cache/
+.turbo/
+.env
+.env.local
+*.log
+logs/
+audit-report.json
+seo-dashboard-*.json
+
+.vercel

@@ -1,0 +1,9 @@
+seo-dashboard-*.json
+*service-account*.json
+audit-report.json
+*.log
+logs/
+node_modules/
+.vercel/
+dist/
+build/

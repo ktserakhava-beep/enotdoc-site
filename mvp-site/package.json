@@ -1,0 +1,14 @@
+{
+  "name": "enotdoc-audit",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "audit": "node audit.js"
+  },
+  "dependencies": {
+    "googleapis": "^148.0.0"
+  },
+  "devDependencies": {
+    "lighthouse": "^13.1.0"
+  }
+}

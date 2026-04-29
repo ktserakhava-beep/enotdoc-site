@@ -1,21 +1,13 @@
 <!DOCTYPE html>
 <html lang="ru">
   <head>
-    <!-- Yandex.Metrika counter: replace YANDEX_METRIKA_ID if you need another counter -->
     <script type="text/javascript">
       window.YANDEX_METRIKA_ID = 108501289;
-
       (function (m, e, t, r, i, k, a) {
-        m[i] =
-          m[i] ||
-          function () {
-            (m[i].a = m[i].a || []).push(arguments);
-          };
+        m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments); };
         m[i].l = 1 * new Date();
         for (var j = 0; j < document.scripts.length; j++) {
-          if (document.scripts[j].src === r) {
-            return;
-          }
+          if (document.scripts[j].src === r) return;
         }
         k = e.createElement(t);
         a = e.getElementsByTagName(t)[0];
@@ -23,7 +15,6 @@
         k.src = r;
         a.parentNode.insertBefore(k, a);
       })(window, document, "script", "https://mc.yandex.ru/metrika/tag.js?id=" + window.YANDEX_METRIKA_ID, "ym");
-
       ym(window.YANDEX_METRIKA_ID, "init", {
         webvisor: true,
         clickmap: true,
@@ -32,92 +23,52 @@
         trackHash: true,
       });
     </script>
-    <noscript>
-      <div>
-        <img src="https://mc.yandex.ru/watch/108501289" style="position: absolute; left: -9999px" alt="" />
-      </div>
-    </noscript>
-    <!-- /Yandex.Metrika counter -->
+    <noscript><div><img src="https://mc.yandex.ru/watch/108501289" style="position:absolute;left:-9999px" alt="" /></div></noscript>
 
-    <!-- Google Analytics 4: replace MEASUREMENT_ID with your real GA4 ID, for example G-XXXXXXXXXX -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=MEASUREMENT_ID"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R0322CPB9T"></script>
     <script>
-      window.GA4_MEASUREMENT_ID = "MEASUREMENT_ID";
+      window.GA4_MEASUREMENT_ID = "G-R0322CPB9T";
       window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
+      function gtag() { dataLayer.push(arguments); }
       window.gtag = gtag;
       gtag("js", new Date());
-      gtag("config", window.GA4_MEASUREMENT_ID, { send_page_view: true });
+      gtag("config", "G-R0322CPB9T");
     </script>
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Документы по отходам в Беларуси | Проверка и порядок | enotdoc</title>
+    <title>Документы по отходам в Беларуси | Онлайн-разбор материалов | enotdoc</title>
     <meta
       name="description"
-      content="Помогаем проверить и привести в порядок документы по отходам в Беларуси. Первичный разбор за 24 часа: покажем пробелы, риски и следующие шаги."
+      content="Онлайн-разбор документов по отходам в Беларуси: акты, договоры, таблицы, журнал учета, паспорта отходов и исходные данные. Помогу собрать картину, увидеть вопросы и подготовить следующий шаг."
     />
-    <meta property="og:title" content="Документы по отходам в Беларуси | Проверка и порядок" />
+    <meta property="og:title" content="enotdoc — документы по отходам в Беларуси без хаоса" />
     <meta
       property="og:description"
-      content="Разбираем текущие документы по отходам, показываем пробелы и формируем понятный следующий шаг без лишних переделок."
+      content="Помогаем быстро понять, что происходит с материалами по отходам, где есть вопросы и какой следующий шаг выбрать."
     />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="ru_BY" />
-    <meta name="google-site-verification" content="GOOGLE_SEARCH_CONSOLE_VERIFICATION_TOKEN" />
-    <meta name="yandex-verification" content="YANDEX_WEBMASTER_VERIFICATION_TOKEN" />
     <link rel="canonical" href="https://enotdoc.vercel.app/" />
-
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
-
+    <link rel="stylesheet" href="./styles.css" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "WebPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "Что входит в первичный разбор документов по отходам?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "В первичный разбор входит анализ текущих документов по отходам, проверка структуры, сроков, договоров, актов и отчетности, а также формирование списка следующих шагов без лишней переработки документов."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Это официальная проверка или экологическое заключение?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Нет, это организационный разбор и анализ текущего состояния документов."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Подходит ли сервис компании без штатного эколога?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Да, сервис подходит для компаний без штатного специалиста."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Какие документы по отходам обычно проверяют в первую очередь?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Обычно в первую очередь смотрят учет отходов, договоры с подрядчиками, акты, сроки, внутренний порядок работы и отчетность, включая 1-отходы."
-            }
-          }
-        ]
+        "@type": "ProfessionalService",
+        "name": "enotdoc",
+        "url": "https://enotdoc.vercel.app/",
+        "areaServed": { "@type": "Country", "name": "Belarus" },
+        "serviceType": "Онлайн-разбор документов по отходам",
+        "description": "Онлайн-разбор уже имеющихся материалов по отходам: список того, что есть, возможные пробелы, вопросы и следующие шаги. Формат не является разработкой, согласованием, подачей документов или официальным заключением.",
+        "contactPoint": { "@type": "ContactPoint", "email": "enotdoc@proton.me", "contactType": "customer service" }
       }
     </script>
-
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -125,385 +76,305 @@
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "Что входит в первичный разбор документов по отходам?",
+            "name": "Что входит в онлайн-разбор материалов по отходам?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Анализируем текущие документы по отходам, показываем пробелы, обращаем внимание на сроки и формируем понятный список следующих шагов без лишней разработки новых документов."
+              "text": "Мы смотрим предоставленные материалы, помогаем увидеть структуру, возможные пробелы, вопросы и следующие шаги. Работа выполняется дистанционно."
             }
           },
           {
             "@type": "Question",
-            "name": "Какие документы по отходам обычно проверяют в первую очередь?",
+            "name": "Это экологические услуги под ключ?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Чаще всего смотрим учет отходов, договоры, акты, отчетность 1-отходы и то, как эта система реально ведется внутри компании."
+              "text": "Нет. enotdoc — дистанционный онлайн-разбор уже имеющихся материалов. Мы не разрабатываем, не согласовываем и не подаем документы."
             }
           },
           {
             "@type": "Question",
-            "name": "Это официальная проверка или экологическое заключение?",
+            "name": "Это официальное заключение?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Нет, это организационный разбор и анализ текущего состояния документов."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Подходит ли сервис компании без штатного эколога?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Да, сервис рассчитан на компании без штатного специалиста."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Вы разрабатываете документы?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Нет, мы работаем только с уже имеющимися документами и их структурой."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Что будет после заявки?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Мы посмотрим ситуацию, скажем, подходит ли кейс под наш формат, и вернем понятный следующий шаг."
+              "text": "Нет. Это не экспертиза, не официальное заключение и не подтверждение соответствия. Результат — рабочая карта вопросов и следующих шагов."
             }
           }
         ]
       }
     </script>
-
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "ProfessionalService",
-        "name": "enotdoc",
-        "description": "Проверка и разбор документов по отходам для бизнеса в Беларуси",
-        "areaServed": {
-          "@type": "Country",
-          "name": "Belarus"
-        },
-        "url": "https://enotdoc.vercel.app",
-        "serviceType": "Разбор документов по отходам",
-        "contactPoint": {
-          "@type": "ContactPoint",
-          "email": "enotdoc@proton.me",
-          "contactType": "customer service"
-        }
-      }
-    </script>
-
-    <link rel="stylesheet" href="./styles.css" />
   </head>
-
   <body>
     <div class="page-shell">
       <header class="topbar">
         <nav class="nav nav-left" aria-label="Основная навигация">
-          <a href="#scope">Что входит</a>
-          <a href="#results">Что получите</a>
+          <a href="#for-whom">Для кого</a>
+          <a href="#result">Результат</a>
+          <a href="#partners">Партнерам</a>
           <a href="#faq">FAQ</a>
         </nav>
-
         <a class="brand" href="./index.html" aria-label="enotdoc">
           <img class="brand-mark" src="./logo_04_clean.png?v=4" alt="enotdoc" />
         </a>
-
         <div class="nav nav-right">
-          <a href="#fit">Как работаем</a>
+          <a href="#topics">Разделы</a>
           <a href="#intake">Контакт</a>
-          <a class="nav-cta" href="#intake">Оставить заявку</a>
+          <a class="nav-cta" href="#intake">Разобрать ситуацию</a>
         </div>
       </header>
 
       <main>
         <section class="hero section">
           <div class="hero-inner container-narrow">
-            <div class="hero-badge">Первичный разбор документов — бесплатно</div>
-            <p class="hero-kicker">Для компаний в Беларуси без штатного эколога</p>
-
+            <div class="hero-badge">Онлайн-разбор документов по отходам</div>
+            <p class="hero-kicker">Для бизнеса в Беларуси, когда в документах нет ясной картины</p>
             <h1>
-              Документы по отходам в Беларуси:
-              <span>как проверить и привести в порядок</span>
+              Наведите порядок
+              <span>в материалах по отходам</span>
             </h1>
-
             <p class="hero-text hero-text-lead">
-              За 24 часа разбираем текущие документы по отходам, показываем пробелы и
-              возвращаем понятный следующий шаг без лишних переделок.
+              Дистанционно разберу ваши акты, договоры, таблицы, журнал учета, паспорта отходов и старые файлы.
+              Помогу понять, что уже собрано, что требует уточнения и какие вопросы подготовить для следующего шага.
             </p>
-
             <div class="hero-actions">
-              <a class="primary-button" href="#intake">Получить первичный разбор за 24 часа</a>
-              <a class="secondary-button" href="#scope">Посмотреть состав работы</a>
+              <a class="primary-button" href="#intake">Разобрать мои материалы</a>
+              <a class="secondary-button" href="#result">Что вы получите</a>
             </div>
-
             <div class="hero-trust" aria-label="Преимущества">
+              <span>Онлайн</span>
+              <span>По вашим материалам</span>
               <span>Ответ в ближайший рабочий день</span>
-              <span>Оценка за 24 часа</span>
-              <span>Следующий шаг без лишней суеты</span>
+              <span>Материалы можно передать специалисту</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="section section-compact" id="for-whom">
+          <div class="section-split">
+            <div class="section-copy">
+              <p class="section-kicker">Когда это нужно</p>
+              <h2>Когда документы вроде есть, но ясной картины нет</h2>
+              <p class="section-text">
+                Один файл у бухгалтера, часть актов в почте, таблица ведется вручную, старые договоры
+                непонятно актуальны или нет. В такой ситуации полезно сначала собрать картину:
+                какие документы по отходам уже есть, какие данные стоит поднять и где не хватает ясности.
+              </p>
+            </div>
+            <div class="section-copy">
+              <p class="section-kicker">Для кого</p>
+              <h2>Собственнику, бухгалтеру, администратору или директору</h2>
+              <p class="section-text">
+                Формат подходит малому бизнесу, офисам, салонам, магазинам, складам и компаниям,
+                где документы по отходам есть частично, но нет спокойной понятной картины:
+                что уже собрано, какие вопросы остались и когда стоит подключить профильного специалиста.
+              </p>
             </div>
           </div>
         </section>
 
         <section class="section section-compact">
-          <div class="section-split">
-            <div class="section-copy">
-              <p class="section-kicker">Где обычно начинается хаос</p>
-              <h2>Проблема чаще не в полном отсутствии документов, а в разрывах и сроках</h2>
-              <p class="section-text">
-                У бизнеса часто уже есть часть документов по отходам. Но они лежат в разных
-                местах, не складываются в систему и не дают уверенности, что всё реально в порядке.
-              </p>
-            </div>
-
-            <div class="section-copy">
-              <p class="section-kicker">Короткие ответы по ключевым запросам</p>
-              <h2>Что обычно ищут по документам по отходам в Беларуси</h2>
-              <p class="section-text">
-                Ниже — быстрые ответы на вопросы, с которых чаще всего начинается разбор.
-              </p>
-            </div>
+          <div class="section-heading container-narrow">
+            <p class="section-kicker">Боли клиента</p>
+              <h2>Что обычно мешает спокойно работать с документами</h2>
           </div>
-
           <div class="seo-answer-grid">
+            <article class="info-card tone-neutral">
+              <p class="card-tag">Хаос</p>
+              <h3>Документы хранятся в разных местах</h3>
+              <p>Акты, договоры, таблицы, переписка и старые файлы не собраны в одну понятную систему.</p>
+            </article>
             <article class="info-card tone-solid-copper">
-              <p class="card-tag">Если коротко</p>
-              <h3>Какие документы по отходам нужны в Беларуси</h3>
-              <p>
-                Обычно в первую очередь смотрят учет отходов, договоры с подрядчиками,
-                акты и отчетность 1-отходы.
-              </p>
-              <p>
-                Дальше важно понять, что из этого реально актуально и как эти документы
-                связаны между собой.
-              </p>
+              <p class="card-tag">Сомнения</p>
+              <h3>Кажется, что все есть, но уверенности нет</h3>
+              <p>Непонятно, какие материалы актуальны, какие данные стоит поднять и какие вопросы задать подрядчику или коллегам.</p>
             </article>
-
-            <article class="info-card tone-neutral">
-              <p class="card-tag">По отчетности</p>
-              <h3>Как понять отчет 1-отходы</h3>
-              <p>
-                Нужно проверить, на каких данных он собран и подтверждаются ли цифры
-                учетом, договорами и актами.
-              </p>
-              <p>
-                Главная ошибка — когда отчет собирается “примерно”, а не опирается на
-                рабочие документы.
-              </p>
-            </article>
-
             <article class="info-card tone-solid-green">
-              <p class="card-tag">Для предприятия</p>
-              <h3>Что делать с отходами на предприятии</h3>
-              <p>
-                Сначала собрать в одну систему то, что уже есть: учет, акты, договоры,
-                сроки и рабочий порядок.
-              </p>
-              <p>
-                Потом убрать пробелы и определить следующий шаг без полной переделки всего пакета.
-              </p>
+              <p class="card-tag">Лишние расходы</p>
+              <h3>Не хочется оплачивать лишнюю работу</h3>
+              <p>Перед обращением к специалисту полезно понять, что уже собрано и с каким запросом идти дальше.</p>
             </article>
-
             <article class="info-card tone-neutral">
-              <p class="card-tag">Частая ситуация</p>
-              <h3>Когда разбор нужен в первую очередь</h3>
-              <p>
-                Когда документы частично есть, но непонятно, что из них актуально,
-                а где уже начинаются риски.
-              </p>
-              <p>
-                Обычно это всплывает перед проверкой, сменой подрядчика или внутренним наведением порядка.
-              </p>
+              <p class="card-tag">Срочный запрос</p>
+              <h3>Нужно быстро собрать вводные</h3>
+              <p>Когда приближается отчетный период или внутри компании просят навести порядок, важно быстро понять, какие материалы уже есть и какие вопросы остались.</p>
             </article>
           </div>
         </section>
 
-        <section class="section" id="fit">
+        <section class="section section-compact">
           <div class="section-heading container-narrow">
-            <p class="section-kicker">Как работаем</p>
-            <h2>Простой процесс без лишней бюрократии</h2>
+            <p class="section-kicker">10 ситуаций</p>
+            <h2>Кому enotdoc особенно полезен</h2>
             <p class="section-text">
-              Не усложняем старт. Сначала быстро разбираемся в текущем состоянии,
-              потом показываем, что делать дальше.
+              enotdoc полезен, когда документы по отходам разбросаны между людьми, файлами и подрядчиками,
+              а нужно быстро понять текущую картину и не начинать с хаоса.
             </p>
           </div>
-
-          <div class="showcase-strip">
-            <article class="showcase-card">
-              <div class="showcase-copy">
-                <p class="showcase-step">01</p>
-                <h3>Смотрим, что уже есть</h3>
-                <p>Разбираем текущие документы и фиксируем, где есть пробелы, разрывы и неясности.</p>
-              </div>
-            </article>
-
-            <article class="showcase-card">
-              <div class="showcase-copy">
-                <p class="showcase-step">02</p>
-                <h3>Показываем следующий шаг</h3>
-                <p>Собираем понятный список: что проверить, что уточнить и что привести в порядок.</p>
-              </div>
-            </article>
-
-            <article class="showcase-card">
-              <div class="showcase-copy">
-                <p class="showcase-step">03</p>
-                <h3>Помогаем выстроить систему</h3>
-                <p>Чтобы документы, сроки и подрядчики перестали держаться только “в голове”.</p>
-              </div>
-            </article>
+          <div class="portrait-grid">
+            <article class="mini-card"><strong>Собственнику</strong><span>понять, где есть порядок, а где не хватает ясности.</span></article>
+            <article class="mini-card"><strong>Бухгалтеру</strong><span>собрать вопросы без попытки стать экологом.</span></article>
+            <article class="mini-card"><strong>Директору</strong><span>увидеть следующий шаг до лишних расходов.</span></article>
+            <article class="mini-card"><strong>Администратору</strong><span>описать ситуацию простыми словами и не ошибиться на старте.</span></article>
+            <article class="mini-card"><strong>Перед отчетным периодом</strong><span>понять, на каких исходных материалах все держится.</span></article>
+            <article class="mini-card"><strong>Перед внутренним запросом</strong><span>быстро собрать документы, которые стоит поднять первыми.</span></article>
+            <article class="mini-card"><strong>Без штатного эколога</strong><span>не держать документы только в голове и переписке.</span></article>
+            <article class="mini-card"><strong>После смены подрядчика</strong><span>понять, что осталось, что актуально и что запросить.</span></article>
+            <article class="mini-card"><strong>Для малого бизнеса</strong><span>начать с понятной карты, а не с полного переоформления.</span></article>
+            <article class="mini-card"><strong>Для экологов</strong><span>получать подготовленные вводные, а не хаотичную папку.</span></article>
           </div>
         </section>
 
-        <section class="section" id="scope">
-          <div class="section-heading container-narrow">
-            <p class="section-kicker">Что входит в работу</p>
-            <h2>Разбор документов по отходам без лишних обещаний</h2>
-            <p class="section-text">
-              Не продаем абстрактную “экологию под ключ”. Работаем вокруг документов,
-              структуры и понятного следующего шага.
-            </p>
-          </div>
-
-          <div class="feature-grid">
-            <article class="feature-card feature-card-wide feature-photo-card">
-              <div class="feature-content feature-content-overlay">
-                <p class="section-label">Что входит</p>
-                <h3>Понятная система работы</h3>
-                <p>
-                  Разбираем текущие документы и фиксируем пробелы:
-                  ПОД, инструкции, 1-отходы, акты, сроки и логика ведения.
-                </p>
-              </div>
-            </article>
-
-            <article class="feature-card feature-card-tall tone-neutral">
-              <div class="feature-content">
-                <p class="section-label">Для кого это</p>
-                <h3>Кому подходит</h3>
-                <p>
-                  Малый и средний бизнес: одна площадка, одно юрлицо, без штатного эколога.
-                  Часть документов уже есть, но нет уверенности, что все в порядке.
-                </p>
-              </div>
-            </article>
-
-            <article class="feature-card tone-solid-sand">
-              <div class="feature-content">
-                <p class="section-label">Что получите</p>
-                <h3>Понятный следующий шаг</h3>
-                <p>
-                  После заявки вы получите список того, что уже есть, зоны внимания
-                  и ориентир по дальнейшим действиям без перегруза сложными формулировками.
-                </p>
-              </div>
-            </article>
-
-            <article class="feature-card dark-card">
-              <div class="feature-content split-layout">
-                <div>
-                  <p class="section-label">Формат работы</p>
-                  <h3>От заявки до запуска</h3>
-                  <p>
-                    Оставляете заявку, мы быстро смотрим ситуацию, возвращаем результат
-                    и возможные следующие шаги.
-                  </p>
-                </div>
-                <div class="status-stack" aria-label="Этапы">
-                  <span>Заявка</span>
-                  <span>Оценка</span>
-                  <span>План</span>
-                  <span>Запуск</span>
-                </div>
-              </div>
-            </article>
-          </div>
-
-          <div class="notice-card">
-            <p class="notice-title">Важно</p>
-            <p>
-              Мы работаем с уже имеющимися документами: помогаем разобраться в составе,
-              структуре и логике ведения.
-            </p>
-            <p>
-              Не разрабатываем нормативные документы, не выступаем в роли официального
-              проверяющего и не даем юридического или экологического заключения.
-            </p>
-          </div>
-
-          <div class="cta-block">
-            <div>
-              <p class="cta-title">Не уверены, в порядке ли документы?</p>
-              <p class="cta-text">Лучше быстро разобрать текущую ситуацию, чем держать её “на потом”.</p>
-            </div>
-            <a href="#intake" class="primary-button">Разобрать ситуацию</a>
-          </div>
-        </section>
-
-        <section class="section" id="results">
+        <section class="section" id="result">
           <div class="section-heading container-narrow">
             <p class="section-kicker">Результат</p>
-            <h2>Что получите после разбора документов</h2>
+            <h2>Что вы получите на руки</h2>
             <p class="section-text">
-              Работаем дистанционно по документам, которые вы предоставляете.
-              Результат передаем в виде понятной структуры и комментариев.
+              Не общие советы и не страшилки. Вы получите рабочую карту по предоставленным материалам:
+              что уже понятно, что требует уточнения, что можно собрать самостоятельно и где лучше подключить профильного специалиста.
             </p>
           </div>
-
           <div class="result-grid">
             <div class="result-stack">
               <article class="result-panel tone-neutral">
-                <h3>Что смотрим в первую очередь</h3>
+                <h3>Карта текущей ситуации</h3>
                 <ul>
-                  <li>Что уже есть по документам</li>
-                  <li>Где сейчас самый большой беспорядок</li>
-                  <li>Где есть пробелы, сроки и слабые места</li>
-                  <li>С чего безопасно начать без лишнего расширения объема</li>
+                  <li>какие материалы уже есть;</li>
+                  <li>какие периоды, отходы, подрядчики и документы требуют уточнения;</li>
+                  <li>где есть вопросы между актами, договорами, журналом, паспортами отходов или таблицами;</li>
+                  <li>что стоит уточнить внутри компании.</li>
                 </ul>
               </article>
-
               <article class="result-panel">
-                <h3>Что не делаем на старте</h3>
+                <h3>Список следующих шагов</h3>
                 <ul>
-                  <li>Не разрабатываем нормативные документы</li>
-                  <li>Не берем сложную инженерную часть</li>
-                  <li>Не подменяем штатного специалиста</li>
-                  <li>Не даём формального заключения о соответствии</li>
+                  <li>что можно собрать самостоятельно;</li>
+                  <li>какие материалы запросить у подрядчиков или коллег;</li>
+                  <li>что подготовить перед обращением к профильному специалисту;</li>
+                  <li>где лучше не гадать и задать вопрос специалисту.</li>
                 </ul>
               </article>
-
+            </div>
+            <div class="seo-stack">
               <article class="result-panel result-panel-accent">
-                <p class="section-label">Что должно получиться</p>
-                <h3>Спокойный рабочий ритм</h3>
+                <p class="section-label">Главная ценность</p>
+                <h3>Сначала ясность, потом решения</h3>
                 <p>
-                  Когда документы, акты и следующие действия уже не держатся в голове,
-                  а собраны в понятную рабочую систему.
+                  Вы не обязаны разбираться во всем сами. Задача разбора — снять туман вокруг документов
+                  и дать спокойный первый шаг: что уже собрано, где есть вопросы и как двигаться дальше.
+                </p>
+              </article>
+              <article class="result-panel tone-solid-copper">
+                <p class="section-label">Онлайн-формат</p>
+                <h3>Разбор по вашим материалам</h3>
+                <p>
+                  Вы передаете описание, файлы, таблицы или фото документов онлайн. В ответ получаете понятную карту:
+                  что уже собрано, где есть вопросы и какой следующий шаг выбрать.
                 </p>
               </article>
             </div>
+          </div>
+        </section>
 
-            <div class="seo-stack">
-              <article class="result-panel tone-solid-copper">
-                <p class="section-label">Пример ситуации</p>
-                <h3>Типовой кейс</h3>
-                <p>
-                  Производственная компания в Минске: часть документов была оформлена,
-                  но отсутствовали понятная структура и контроль сроков. После разбора
-                  стало видно, где ключевые пробелы и какой следующий шаг нужен в первую очередь.
-                </p>
-              </article>
+        <section class="section section-compact" id="topics">
+          <div class="section-heading container-narrow">
+            <p class="section-kicker">Разделы</p>
+            <h2>С чего можно начать</h2>
+            <p class="section-text">
+              Выберите ситуацию, которая ближе к вашей: первичные документы, паспорта отходов,
+              журнал учета или исходные материалы для отчетности.
+            </p>
+          </div>
+          <div class="seo-answer-grid">
+            <article class="info-card tone-solid-copper">
+              <p class="card-tag">Материалы</p>
+              <h3>Первичные документы по отходам</h3>
+              <p>Акты, договоры, таблицы и старые файлы: что уже есть, что актуально и где не хватает ясности.</p>
+              <a class="secondary-button" href="./primary-waste-documents.html">Открыть раздел</a>
+            </article>
+            <article class="info-card tone-neutral">
+              <p class="card-tag">Паспорта</p>
+              <h3>Паспорта отходов</h3>
+              <p>Как связать имеющиеся материалы с учетом, актами, подрядчиками и вопросами к специалисту.</p>
+              <a class="secondary-button" href="./waste-passports.html">Открыть раздел</a>
+            </article>
+            <article class="info-card tone-solid-green">
+              <p class="card-tag">Учет</p>
+              <h3>Журнал учета отходов</h3>
+              <p>Где часто появляются вопросы между записями, актами и внутренним порядком работы.</p>
+              <a class="secondary-button" href="./waste-accounting-journal.html">Открыть раздел</a>
+            </article>
+            <article class="info-card tone-neutral">
+              <p class="card-tag">Отчетность</p>
+              <h3>1-отходы и исходные данные</h3>
+              <p>Какие исходные материалы стоит собрать до обращения к профильному специалисту по отчетности.</p>
+              <a class="secondary-button" href="./environmental-reporting.html">Открыть раздел</a>
+            </article>
+          </div>
+        </section>
 
-              <article class="result-panel">
-                <p class="section-label">Кому не подойдет</p>
-                <h3>Когда нужен другой формат</h3>
-                <ul>
-                  <li>Если требуется разработка нормативных документов</li>
-                  <li>Если нужно официальное экологическое заключение</li>
-                  <li>Если требуется выездная работа на территории предприятия</li>
-                </ul>
-              </article>
+        <section class="section section-compact">
+          <div class="section-heading container-narrow">
+            <p class="section-kicker">Как проходит работа</p>
+            <h2>От хаотичной папки к понятному следующему шагу</h2>
+          </div>
+          <div class="portrait-grid">
+            <article class="mini-card"><strong>1. Описываете ситуацию</strong><span>пишите, что за организация, какие материалы есть и где сейчас неясно.</span></article>
+            <article class="mini-card"><strong>2. Передаете материалы</strong><span>можно прислать акты, договоры, таблицы, журнал, паспорта, фото или старые файлы.</span></article>
+            <article class="mini-card"><strong>3. Получаете карту</strong><span>видите, что уже собрано, какие вопросы остались и что стоит поднять внутри компании.</span></article>
+            <article class="mini-card"><strong>4. Выбираете следующий шаг</strong><span>самостоятельно собираете недостающее, обращаетесь к подрядчику или профильному специалисту.</span></article>
+          </div>
+        </section>
+
+        <section class="section section-compact">
+          <div class="section-heading container-narrow">
+            <p class="section-kicker">Материалы</p>
+            <h2>Что можно прислать для начала</h2>
+            <p class="section-text">
+              Не нужно сразу собирать идеальную папку. Для первого разбора достаточно того, что уже есть:
+              описание ситуации, акты, договоры, таблицы, журнал учета, паспорта отходов, фото документов или старые файлы.
+            </p>
+          </div>
+          <div class="seo-answer-grid">
+            <article class="info-card tone-neutral"><h3>Описание ситуации</h3><p>Коротко напишите, что сейчас неясно и кто внутри компании работает с документами.</p></article>
+            <article class="info-card tone-solid-copper"><h3>Имеющиеся документы</h3><p>Подойдут акты, договоры, таблицы, журнал учета, паспорта отходов и старые файлы.</p></article>
+            <article class="info-card tone-solid-green"><h3>Вопросы и сроки</h3><p>Укажите, есть ли ближайший отчетный период, внутренний запрос или разговор со специалистом.</p></article>
+            <article class="info-card tone-neutral"><h3>Неполный набор</h3><p>Можно начать с того, что есть под рукой. Если материалов много, сначала оценим объем.</p></article>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="notice-card">
+            <p class="notice-title">Честные границы формата</p>
+            <p>
+              enotdoc не заменяет профильного эколога там, где нужны разработка документов, подача отчетности,
+              согласование, экспертиза, официальное заключение или представительство перед госорганами.
+              Моя задача — помочь вам собрать картину по имеющимся материалам и прийти к следующему шагу подготовленными.
+            </p>
+          </div>
+        </section>
+
+        <section class="section" id="partners">
+          <div class="section-heading container-narrow">
+            <p class="section-kicker">Партнерский формат</p>
+            <h2>Для экологов и профильных организаций</h2>
+            <p class="section-text">
+              enotdoc не конкурирует с разработкой, отчетностью и согласованиями. Я готовлю клиента и его материалы
+              к передаче специалисту: убираю хаос на входе, собираю вводную и формулирую вопросы.
+            </p>
+          </div>
+          <div class="partner-panel">
+            <div class="partner-copy">
+              <p class="section-label">Что можно отдавать на подготовку</p>
+              <h3>Кейсы, где клиент сам не понимает, что у него есть</h3>
+              <p>
+                Если к вам приходит клиент с папкой актов, старых договоров и фразой “посмотрите, что у нас”,
+                enotdoc может сделать первичный онлайн-разбор до вашей основной работы.
+              </p>
+              <a class="primary-button" href="#intake">Обсудить партнерский формат</a>
+            </div>
+            <div class="partner-list">
+              <article class="mini-card"><strong>На входе</strong><span>хаотичное описание, файлы, таблицы, акты, договоры.</span></article>
+              <article class="mini-card"><strong>После разбора</strong><span>структурированная вводная, список материалов и вопросов.</span></article>
+              <article class="mini-card"><strong>Для специалиста</strong><span>понятнее объем и меньше времени на первичную сортировку материалов.</span></article>
+              <article class="mini-card"><strong>Для клиента</strong><span>спокойнее идти дальше: самостоятельно, к подрядчику или экологу.</span></article>
             </div>
           </div>
         </section>
@@ -513,45 +384,34 @@
             <p class="section-kicker">FAQ</p>
             <h2>Частые вопросы</h2>
           </div>
-
           <div class="faq-grid">
             <article class="faq-card tone-neutral">
-              <h3>Что входит в первичный разбор документов по отходам?</h3>
-              <p>
-                Анализируем текущие документы по отходам, показываем пробелы, обращаем
-                внимание на сроки и формируем понятный список следующих шагов без лишней разработки новых документов.
-              </p>
+              <h3>Это экологические услуги под ключ?</h3>
+              <p>Нет. enotdoc — это дистанционный разбор предоставленных материалов и подготовка списка вопросов и следующих шагов.</p>
             </article>
-
             <article class="faq-card">
-              <h3>Какие документы по отходам обычно проверяют в первую очередь?</h3>
-              <p>
-                Чаще всего смотрим учет отходов, договоры, акты, отчетность 1-отходы
-                и то, как эта система реально ведется внутри компании.
-              </p>
+              <h3>Вы выезжаете на объект?</h3>
+              <p>Нет. Работа проходит онлайн: по описанию, файлам, таблицам и документам, которые вы передаете дистанционно.</p>
             </article>
-
             <article class="faq-card">
-              <h3>Это официальная проверка или экологическое заключение?</h3>
-              <p>Нет, это организационный разбор и анализ текущего состояния документов.</p>
+              <h3>Можно ли с этим идти к экологу?</h3>
+              <p>Да. В этом и смысл: после разбора проще понять, какие материалы уже есть и какие вопросы стоит задать профильному специалисту.</p>
             </article>
-
             <article class="faq-card">
-              <h3>Подходит ли сервис компании без штатного эколога?</h3>
-              <p>Да, сервис рассчитан на компании без штатного специалиста.</p>
+              <h3>Если у нас все совсем запутано?</h3>
+              <p>Это нормальная ситуация для первого разбора. Начинаем не с идеального порядка, а с того, что есть сейчас.</p>
             </article>
-
             <article class="faq-card">
-              <h3>Вы разрабатываете документы?</h3>
-              <p>Нет, мы работаем только с уже имеющимися документами и их структурой.</p>
+              <h3>Что будет результатом?</h3>
+              <p>Короткая карта текущей ситуации: что есть, что требует уточнения, какие вопросы подготовить и какой следующий шаг выбрать.</p>
             </article>
-
             <article class="faq-card">
-              <h3>Что будет после заявки?</h3>
-              <p>
-                Мы посмотрим ситуацию, скажем, подходит ли кейс под наш формат,
-                и вернем понятный следующий шаг.
-              </p>
+              <h3>Как оформить оплату?</h3>
+              <p>После согласования задачи я подскажу порядок оплаты и передам подтверждение оплаты.</p>
+            </article>
+            <article class="faq-card">
+              <h3>Сколько материалов можно прислать?</h3>
+              <p>Для начала можно прислать даже неполный набор. Если материалов много, я сначала посмотрю объем и скажу, как лучше двигаться дальше.</p>
             </article>
           </div>
         </section>
@@ -559,68 +419,27 @@
         <section class="section intake-section" id="intake">
           <aside class="intake-card">
             <div class="intake-card-head">
-              <p class="card-label">Первичная оценка за 24 часа</p>
-              <h2>Оставьте кейс для первичной оценки</h2>
-              <p>Коротко опишите ситуацию.</p>
-              <p>
-                Мы посмотрим, подходит ли кейс под наш формат, и вернем понятный следующий шаг.
-              </p>
+              <p class="card-label">Первичная заявка</p>
+              <h2>Опишите ситуацию или партнерский кейс</h2>
+              <p>Можно без терминов и без файлов. Достаточно пары предложений: что за организация, какие документы есть и где сейчас неясно.</p>
             </div>
-
-            <form
-              class="intake-form"
-              id="intake-form"
-              method="POST"
-              action="https://script.googleusercontent.com/macros/echo?user_content_key=AWDtjMUP5ayEMhDa5KOFtCBd8IujAcUUei0v9Z01lBbkNbdhOw-GejMJOsIv-hl2OSp7q4eGcojUMxwVe9BmoJQO4LhrOY3YZG0YW9vzVNIWeGXvQuaGJwIbvrIpQ8tvbAyWj7r1xG7L3JGWdZ3Q-DTQ1krAeY3b-z3qnkBj3VFlaEySb1il0bveqefcjEymE9yqWwu2VRceROI4ouWIy2tGDSl_NvfKqqm931ayZXBxw5W62m5yrySFtrIQU9r3ch_Fz2l3QNDI4r_y1jlDg_knqeZSsUcigg&lib=M2a8CZ1M1o3HL3NWyGsfBkqFnf-6WjdAd"
-            >
+            <form class="intake-form" id="intake-form" method="POST" action="/api/form">
               <input type="hidden" name="source" value="website" />
-
+              <label>Компания<input type="text" name="company" placeholder="ООО Пример" required /></label>
+              <label>Контакт и роль<input type="text" name="contact" placeholder="Мария, директор / бухгалтер" required /></label>
+              <label>Email или телефон<input type="text" name="emailOrPhone" placeholder="+375... / email" required /></label>
               <label>
-                Компания
-                <input type="text" name="company" placeholder="ООО Пример" required />
+                Что сейчас неясно
+                <textarea name="problem" rows="4" placeholder="Например: есть договоры и акты, но непонятно, все ли актуально; учет ведется в таблице; скоро отчетный период; или вы эколог и хотите передать кейс на первичную подготовку." required></textarea>
               </label>
-
-              <label>
-                Контакт и роль
-                <input type="text" name="contact" placeholder="Мария, директор / бухгалтер" required />
-              </label>
-
-              <label>
-                Email или телефон
-                <input type="text" name="emailOrPhone" placeholder="+375... / email" required />
-              </label>
-
-              <label>
-                Что сейчас не в порядке
-                <textarea
-                  name="problem"
-                  rows="4"
-                  placeholder="Например: часть документов есть, но неясно, чего не хватает; акты и подрядчики ведутся хаотично; сроки держатся вручную"
-                  required
-                ></textarea>
-              </label>
-
-              <button type="submit" class="primary-button full-width" id="intake-submit">
-                Отправить заявку
-              </button>
-
+              <button type="submit" class="primary-button full-width" id="intake-submit">Получить карту следующих шагов</button>
               <label class="consent-note">
                 <input type="checkbox" name="consent" required />
-                <span>
-                  Я даю согласие на обработку персональных данных для обработки заявки
-                  в соответствии с Политикой.
-                </span>
+                <span>Я даю согласие на обработку персональных данных для обработки заявки в соответствии с Политикой.</span>
               </label>
-
-              <a href="./privacy.html" class="form-legal-link">
-                Политика обработки персональных данных
-              </a>
-
+              <a href="./privacy.html" class="form-legal-link">Политика обработки персональных данных</a>
               <p class="form-status" id="form-status" aria-live="polite"></p>
-
-              <p class="form-note">
-                После заявки свяжемся, уточним детали и скажем, подходит ли кейс под наш формат работы.
-              </p>
+              <p class="form-note">После заявки уточним детали и скажем, подходит ли ситуация под дистанционный онлайн-разбор.</p>
             </form>
           </aside>
         </section>
@@ -628,9 +447,17 @@
 
       <footer class="site-footer">
         <div class="footer-meta">
-          <p>Физическое лицо — плательщик НПД</p>
+          <p>enotdoc — онлайн-разбор материалов по документам отходов</p>
           <p>Email: <a href="mailto:enotdoc@proton.me">enotdoc@proton.me</a></p>
+          <p>
+            Разделы:
+            <a href="./primary-waste-documents.html">первичные документы</a>,
+            <a href="./waste-passports.html">паспорта отходов</a>,
+            <a href="./waste-accounting-journal.html">журнал учета</a>,
+            <a href="./environmental-reporting.html">отчетность</a>
+          </p>
           <a href="./privacy.html" class="footer-policy-link">Политика обработки персональных данных</a>
+          <p>Информационный онлайн-разбор. Не является экспертизой, разработкой документации, подачей отчетности или представительством перед госорганами.</p>
           <p>Актуально на: апрель 2026</p>
         </div>
       </footer>
@@ -638,164 +465,96 @@
 
     <script>
       (() => {
-        const endpoint =
-          "https://script.googleusercontent.com/macros/echo?user_content_key=AWDtjMUP5ayEMhDa5KOFtCBd8IujAcUUei0v9Z01lBbkNbdhOw-GejMJOsIv-hl2OSp7q4eGcojUMxwVe9BmoJQO4LhrOY3YZG0YW9vzVNIWeGXvQuaGJwIbvrIpQ8tvbAyWj7r1xG7L3JGWdZ3Q-DTQ1krAeY3b-z3qnkBj3VFlaEySb1il0bveqefcjEymE9yqWwu2VRceROI4ouWIy2tGDSl_NvfKqqm931ayZXBxw5W62m5yrySFtrIQU9r3ch_Fz2l3QNDI4r_y1jlDg_knqeZSsUcigg&lib=M2a8CZ1M1o3HL3NWyGsfBkqFnf-6WjdAd";
-
+        const endpoint = "/api/form";
         const form = document.getElementById("intake-form");
         const button = document.getElementById("intake-submit");
         const status = document.getElementById("form-status");
-        const emailLinks = document.querySelectorAll('a[href^="mailto:"]');
         const sourceField = form?.querySelector('input[name="source"]');
-        const sourceParam = new URLSearchParams(window.location.search).get("from");
-        const savedSource = localStorage.getItem("lead_source");
-
-        const sessionFlags = {
-          formStarted: sessionStorage.getItem("form_started") === "1",
-          formVisible: sessionStorage.getItem("form_visible") === "1",
-          engaged30s: sessionStorage.getItem("engaged_30s") === "1",
-          scroll70: sessionStorage.getItem("scroll_70") === "1",
-          validationError: sessionStorage.getItem("validation_error") === "1",
-          formAbandon: sessionStorage.getItem("form_abandon") === "1",
-          returnVisit: sessionStorage.getItem("return_visit") === "1",
-          copyEmail: sessionStorage.getItem("copy_email") === "1",
-          leadSent: sessionStorage.getItem("lead_sent") === "1",
-          qualifiedLead: sessionStorage.getItem("qualified_lead") === "1",
-        };
-
-        let abandonTimer = null;
-
         if (!form || !button || !status) return;
 
-        const trackGoal = (goal) => {
-          if (typeof ym === "function") {
-            ym(window.YANDEX_METRIKA_ID, "reachGoal", goal);
-          }
+        const defaultButtonText = button.textContent;
+
+        const trackEvent = (eventName, params = {}) => {
+          if (typeof ym === "function") ym(window.YANDEX_METRIKA_ID, "reachGoal", eventName);
+          if (typeof gtag === "function") gtag("event", eventName, { event_category: "site_engagement", ...params });
         };
 
+        const sourceParam = new URLSearchParams(window.location.search).get("from");
+        const savedSource = localStorage.getItem("lead_source");
         const persistSource = () => {
-          const resolvedSource = sourceParam || savedSource || document.referrer || "direct";
-          localStorage.setItem("lead_source", resolvedSource);
-
-          if (sourceField) {
-            sourceField.value = resolvedSource;
-          }
-
-          return resolvedSource;
+          const source = sourceParam || savedSource || document.referrer || "direct";
+          localStorage.setItem("lead_source", source);
+          if (sourceField) sourceField.value = source;
+          return source;
         };
-
         persistSource();
 
-        if (!sessionFlags.returnVisit && localStorage.getItem("site_visited") === "1") {
-          sessionFlags.returnVisit = true;
-          sessionStorage.setItem("return_visit", "1");
-          trackGoal("return_visit");
-        }
+        let formStarted = sessionStorage.getItem("form_started") === "1";
+        let formVisible = sessionStorage.getItem("form_visible") === "1";
+        let scroll70 = sessionStorage.getItem("scroll_70") === "1";
+        let engaged30s = sessionStorage.getItem("engaged_30s") === "1";
 
+        if (localStorage.getItem("site_visited") === "1" && sessionStorage.getItem("return_visit") !== "1") {
+          sessionStorage.setItem("return_visit", "1");
+          trackEvent("return_visit");
+        }
         localStorage.setItem("site_visited", "1");
 
-        button.addEventListener("click", () => {
-          trackGoal("click_submit");
-        });
-
-        emailLinks.forEach((link) => {
-          link.addEventListener("click", () => {
-            trackGoal("click_email");
-          });
-        });
-
-        document.addEventListener("copy", () => {
-          if (sessionFlags.copyEmail) return;
-
-          const selectedText = window.getSelection ? window.getSelection().toString() : "";
-          if (!selectedText || !selectedText.includes("enotdoc@proton.me")) return;
-
-          sessionFlags.copyEmail = true;
-          sessionStorage.setItem("copy_email", "1");
-          trackGoal("copy_email");
-        });
-
-        const scheduleAbandon = () => {
-          if (abandonTimer || sessionFlags.formAbandon || sessionFlags.leadSent) return;
-
-          abandonTimer = window.setTimeout(() => {
-            if (sessionFlags.formAbandon || sessionFlags.leadSent || !sessionFlags.formStarted) return;
-            sessionFlags.formAbandon = true;
-            sessionStorage.setItem("form_abandon", "1");
-            trackGoal("form_abandon");
-          }, 120000);
-        };
-
         const markFormStarted = () => {
-          if (sessionFlags.formStarted) return;
-          sessionFlags.formStarted = true;
+          if (formStarted) return;
+          formStarted = true;
           sessionStorage.setItem("form_started", "1");
-          trackGoal("form_start");
-          scheduleAbandon();
+          trackEvent("form_start");
         };
-
         form.addEventListener("focusin", markFormStarted);
         form.addEventListener("input", markFormStarted);
+        button.addEventListener("click", () => trackEvent("click_submit"));
 
-        if (!sessionFlags.formVisible && "IntersectionObserver" in window) {
-          const observer = new IntersectionObserver(
-            (entries) => {
-              entries.forEach((entry) => {
-                if (!entry.isIntersecting || sessionFlags.formVisible) return;
-                sessionFlags.formVisible = true;
-                sessionStorage.setItem("form_visible", "1");
-                trackGoal("scroll_to_form");
-                observer.disconnect();
-              });
-            },
-            { threshold: 0.35 }
-          );
-
+        if (!formVisible && "IntersectionObserver" in window) {
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting || formVisible) return;
+              formVisible = true;
+              sessionStorage.setItem("form_visible", "1");
+              trackEvent("scroll_to_form");
+              observer.disconnect();
+            });
+          }, { threshold: 0.35 });
           observer.observe(form);
         }
 
-        if (!sessionFlags.engaged30s) {
+        if (!engaged30s) {
           window.setTimeout(() => {
-            if (sessionFlags.engaged30s) return;
-            sessionFlags.engaged30s = true;
+            if (engaged30s) return;
+            engaged30s = true;
             sessionStorage.setItem("engaged_30s", "1");
-            trackGoal("engaged_30s");
+            trackEvent("engaged_30s");
           }, 30000);
         }
 
         const onScrollDepth = () => {
-          if (sessionFlags.scroll70) return;
-
-          const scrollTop = window.scrollY || window.pageYOffset;
+          if (scroll70) return;
           const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
-          const percent = documentHeight > 0 ? (scrollTop / documentHeight) * 100 : 0;
-
+          const percent = documentHeight > 0 ? ((window.scrollY || window.pageYOffset) / documentHeight) * 100 : 0;
           if (percent < 70) return;
-
-          sessionFlags.scroll70 = true;
+          scroll70 = true;
           sessionStorage.setItem("scroll_70", "1");
-          trackGoal("scroll_70");
+          trackEvent("scroll_70");
           window.removeEventListener("scroll", onScrollDepth);
         };
-
         window.addEventListener("scroll", onScrollDepth, { passive: true });
         onScrollDepth();
 
         form.addEventListener("submit", async (event) => {
           event.preventDefault();
-
           if (!form.checkValidity()) {
-            if (!sessionFlags.validationError) {
-              sessionFlags.validationError = true;
-              sessionStorage.setItem("validation_error", "1");
-              trackGoal("validation_error");
-            }
+            trackEvent("validation_error");
             form.reportValidity();
             return;
           }
 
-          const resolvedSource = persistSource();
           const formData = new FormData(form);
-          formData.set("source", resolvedSource);
+          formData.set("source", persistSource());
           const payload = Object.fromEntries(formData.entries());
 
           button.disabled = true;
@@ -806,56 +565,30 @@
           try {
             const response = await fetch(endpoint, {
               method: "POST",
-              headers: {
-                "Content-Type": "text/plain;charset=utf-8",
-              },
+              headers: { "Content-Type": "application/json" },
               body: JSON.stringify(payload),
             });
+            const result = await response.json();
+            if (!response.ok || !result.ok) throw new Error("request_failed");
 
-            if (!response.ok) {
-              throw new Error("request_failed");
-            }
-
-            if (typeof ym === "function") {
-              ym(window.YANDEX_METRIKA_ID, "reachGoal", "lead");
-            }
-
-            if (typeof gtag === "function" && window.GA4_MEASUREMENT_ID !== "MEASUREMENT_ID") {
-              gtag("event", "form_submit", {
-                event_category: "lead",
-                event_label: "intake_form",
-                page_location: window.location.href,
-              });
-            }
-
-            sessionFlags.leadSent = true;
+            trackEvent("form_submit", { method: "form" });
+            trackEvent("lead", { method: "form" });
+            if (formStarted && formVisible) trackEvent("qualified_lead");
             sessionStorage.setItem("lead_sent", "1");
-
-            if (abandonTimer) {
-              window.clearTimeout(abandonTimer);
-              abandonTimer = null;
-            }
-
-            if (sessionFlags.formVisible && sessionFlags.formStarted && !sessionFlags.qualifiedLead) {
-              sessionFlags.qualifiedLead = true;
-              sessionStorage.setItem("qualified_lead", "1");
-              trackGoal("qualified_lead");
-            }
 
             form.reset();
             persistSource();
-
-            status.textContent =
-              "Спасибо. Заявку получили. Вернемся с первым следующим шагом в течение 24 часов.";
+            status.textContent = "Заявку получили. Вернусь с первым понятным следующим шагом.";
             status.className = "form-status is-success";
+            window.alert("Заявка отправлена успешно.");
           } catch (error) {
-            trackGoal("form_error");
-            status.textContent =
-              "Не удалось отправить заявку. Попробуйте еще раз через минуту или свяжитесь напрямую.";
+            trackEvent("form_error");
+            status.textContent = "Не удалось отправить заявку. Попробуйте еще раз или свяжитесь напрямую.";
             status.className = "form-status is-error";
+            window.alert("Не удалось отправить заявку. Попробуйте еще раз.");
           } finally {
             button.disabled = false;
-            button.textContent = "Отправить заявку";
+            button.textContent = defaultButtonText;
           }
         });
       })();

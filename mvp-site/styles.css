@@ -366,9 +366,9 @@ li {
 }
 
 .hero h1 {
-  max-width: 18ch;
+  max-width: 22ch;
   margin: 0 auto var(--space-4);
-  font-size: clamp(2.6rem, 5vw, 4.4rem);
+  font-size: clamp(2.5rem, 4.6vw, 4rem);
   line-height: 1.05;
   text-wrap: balance;
 }
@@ -431,6 +431,34 @@ li {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
+}
+
+.portrait-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.mini-card {
+  display: grid;
+  gap: 8px;
+  min-height: 118px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: rgba(251, 245, 235, 0.78);
+}
+
+.mini-card strong {
+  font-family: "Manrope", sans-serif;
+  font-size: 0.98rem;
+  line-height: 1.25;
+}
+
+.mini-card span {
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.55;
 }
 
 .info-card,
@@ -665,6 +693,44 @@ li {
 
 .notice-card p + p {
   margin-top: 8px;
+}
+
+.partner-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  gap: 16px;
+  align-items: stretch;
+}
+
+.partner-copy {
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--card-dark);
+  color: #fff8ed;
+  box-shadow: var(--shadow-soft);
+}
+
+.partner-copy h3,
+.partner-copy .section-label {
+  color: #fff8ed;
+}
+
+.partner-copy p {
+  color: rgba(255, 248, 237, 0.78);
+  line-height: 1.75;
+}
+
+.partner-copy .primary-button {
+  margin-top: var(--space-5);
+  background: #fff8ed;
+  color: var(--text);
+}
+
+.partner-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
 }
 
 .cta-block {
@@ -921,6 +987,30 @@ li {
   color: var(--muted);
 }
 
+.seo-page {
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.seo-page .hero {
+  padding-top: var(--space-8);
+}
+
+.seo-page h1 {
+  max-width: 16ch;
+  font-size: clamp(2.3rem, 5vw, 4.4rem);
+  line-height: 1.04;
+}
+
+.seo-page h2 {
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  line-height: 1.16;
+}
+
+.seo-page .section-text {
+  max-width: 72ch;
+}
+
 /* Responsive */
 
 @media (max-width: 1100px) {
@@ -945,7 +1035,10 @@ li {
   .feature-grid,
   .result-grid,
   .faq-grid,
-  .seo-answer-grid {
+  .seo-answer-grid,
+  .portrait-grid,
+  .partner-panel,
+  .partner-list {
     grid-template-columns: 1fr;
   }
 

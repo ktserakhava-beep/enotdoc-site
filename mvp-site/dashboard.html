@@ -3,23 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Внутренний Dashboard | enotdoc</title>
+    <title>Честный Dashboard | enotdoc</title>
     <meta name="robots" content="noindex, nofollow" />
     <style>
       :root {
-        --bg: #f4ecdf;
         --surface: #fffaf2;
         --surface-2: #f7f0e5;
         --text: #171511;
         --muted: #5f564a;
         --line: rgba(23, 21, 17, 0.08);
-        --accent: #1f352a;
         --success: #3f6b47;
         --warning: #9a6a2d;
         --error: #96483c;
-        --success-soft: rgba(63, 107, 71, 0.12);
-        --warning-soft: rgba(154, 106, 45, 0.14);
-        --error-soft: rgba(150, 72, 60, 0.12);
         --radius-xl: 24px;
         --radius-lg: 18px;
         --radius-md: 14px;
@@ -39,21 +34,27 @@
           linear-gradient(180deg, #f8f2e8 0%, #f3eadc 100%);
       }
 
-      a {
-        color: inherit;
-      }
-
       .shell {
         width: min(1240px, calc(100% - 32px));
         margin: 36px auto 48px;
       }
 
-      .panel {
+      .panel,
+      .card {
         border: 1px solid var(--line);
-        border-radius: var(--radius-xl);
         background: var(--surface);
+      }
+
+      .panel {
+        border-radius: var(--radius-xl);
         box-shadow: var(--shadow);
         padding: 28px;
+      }
+
+      .card {
+        border-radius: var(--radius-lg);
+        background: #fff;
+        padding: 20px;
       }
 
       h1,
@@ -65,121 +66,94 @@
 
       .header {
         display: flex;
-        align-items: flex-start;
         justify-content: space-between;
         gap: 18px;
-        margin-bottom: 26px;
+        margin-bottom: 24px;
       }
 
       .lead {
         margin-top: 10px;
+        max-width: 780px;
         color: var(--muted);
         line-height: 1.6;
-        max-width: 760px;
       }
 
-      .header-note {
-        max-width: 360px;
-        padding: 14px 16px;
+      .note,
+      .status-banner,
+      .foot-note {
         border: 1px solid var(--line);
         border-radius: var(--radius-md);
         background: var(--surface-2);
+      }
+
+      .note {
+        max-width: 360px;
+        padding: 14px 16px;
         color: var(--muted);
         line-height: 1.6;
         font-size: 0.94rem;
       }
 
-      .gauges {
+      .status-banner {
+        margin-bottom: 18px;
+        padding: 14px 16px;
+      }
+
+      .status-banner.error {
+        border-color: rgba(150, 72, 60, 0.18);
+        color: var(--error);
+        background: rgba(150, 72, 60, 0.08);
+      }
+
+      .summary-grid,
+      .content-grid {
         display: grid;
         gap: 16px;
-        grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      }
+
+      .summary-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         margin-bottom: 24px;
       }
 
-      .gauge-card,
-      .card {
-        border: 1px solid var(--line);
-        border-radius: var(--radius-lg);
-        background: #fff;
+      .content-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       }
 
-      .gauge-card {
-        padding: 18px 16px;
-        text-align: center;
-      }
-
-      .gauge-label {
+      .metric-label {
         color: var(--muted);
         font-size: 0.82rem;
         text-transform: uppercase;
         letter-spacing: 0.08em;
       }
 
-      .gauge {
-        --value: 0;
-        --tone: var(--warning);
-        width: 116px;
-        height: 116px;
-        margin: 14px auto 10px;
-        border-radius: 50%;
-        background:
-          radial-gradient(closest-side, #fffaf2 74%, transparent 75% 100%),
-          conic-gradient(var(--tone) calc(var(--value) * 1%), rgba(23, 21, 17, 0.08) 0);
-        display: grid;
-        place-items: center;
-      }
-
-      .gauge-inner {
-        display: grid;
-        gap: 2px;
-        place-items: center;
-      }
-
-      .gauge-score {
-        font-size: 1.4rem;
+      .metric-value {
+        margin-top: 8px;
+        font-size: 2rem;
         font-weight: 700;
       }
 
-      .gauge-state {
-        font-size: 0.82rem;
-        color: var(--muted);
-      }
-
-      .gauge-caption {
-        color: var(--muted);
-        line-height: 1.5;
-        font-size: 0.92rem;
-      }
-
-      .content-grid {
-        display: grid;
-        gap: 16px;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      }
-
-      .card {
-        padding: 20px;
-      }
-
-      .card h2 {
-        margin-bottom: 8px;
-        font-size: 1.02rem;
-      }
-
-      .card-intro {
-        margin-bottom: 14px;
+      .metric-note,
+      .card-intro,
+      .foot-note {
         color: var(--muted);
         line-height: 1.6;
       }
 
-      .check-list {
-        display: grid;
-        gap: 10px;
+      .metric-note,
+      .card-intro {
+        margin-top: 8px;
       }
 
-      .check-item {
+      .list {
+        display: grid;
+        gap: 10px;
+        margin-top: 14px;
+      }
+
+      .list-item {
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         justify-content: space-between;
         gap: 12px;
         padding: 12px 14px;
@@ -188,21 +162,29 @@
         background: var(--surface-2);
       }
 
-      .check-label {
-        font-weight: 600;
+      .list-item > div {
+        min-width: 0;
       }
 
-      .check-extra {
+      .list-item strong,
+      .list-meta {
+        overflow-wrap: anywhere;
+      }
+
+      .list-item strong {
         display: block;
+      }
+
+      .list-meta {
         margin-top: 4px;
         color: var(--muted);
-        font-size: 0.9rem;
-        font-weight: 400;
+        font-size: 0.92rem;
       }
 
-      .status-pill {
+      .pill {
         display: inline-flex;
-        align-items: center;
+        flex: 0 0 auto;
+        max-width: 100%;
         white-space: nowrap;
         padding: 6px 10px;
         border-radius: 999px;
@@ -210,27 +192,49 @@
         font-weight: 700;
       }
 
-      .status-pill.ok {
+      .pill.ok {
         color: var(--success);
-        background: var(--success-soft);
+        background: rgba(63, 107, 71, 0.12);
       }
 
-      .status-pill.warn {
+      .pill.warn {
         color: var(--warning);
-        background: var(--warning-soft);
+        background: rgba(154, 106, 45, 0.14);
       }
 
-      .status-pill.fail {
-        color: var(--error);
-        background: var(--error-soft);
-      }
-
-      .status-pill.neutral {
+      .pill.neutral {
         color: var(--muted);
         background: rgba(95, 86, 74, 0.1);
       }
 
-      .actions {
+      .list-item.lead-item {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .lead-date {
+        margin-top: 8px;
+        color: var(--muted);
+        font-size: 0.86rem;
+      }
+
+      .lead-item.is-debug {
+        opacity: 0.72;
+      }
+
+      .lead-item.is-debug strong::after {
+        content: " test";
+        margin-left: 8px;
+        padding: 3px 7px;
+        border-radius: 999px;
+        background: rgba(154, 106, 45, 0.14);
+        color: var(--warning);
+        font-size: 0.72rem;
+        font-weight: 700;
+        vertical-align: middle;
+      }
+
+      .links {
         display: grid;
         gap: 10px;
       }
@@ -251,24 +255,8 @@
       .foot-note {
         margin-top: 22px;
         padding: 14px 16px;
-        border: 1px dashed rgba(23, 21, 17, 0.18);
-        border-radius: 14px;
-        color: var(--muted);
-        line-height: 1.6;
+        border-style: dashed;
         background: rgba(255, 255, 255, 0.65);
-      }
-
-      .lead-summary {
-        padding: 14px 16px;
-        border: 1px solid var(--line);
-        border-radius: 12px;
-        background: var(--surface-2);
-        color: var(--muted);
-        line-height: 1.65;
-      }
-
-      .lead-summary strong {
-        color: var(--text);
       }
 
       @media (max-width: 760px) {
@@ -283,450 +271,488 @@
       <main class="panel">
         <div class="header">
           <div>
-            <h1>Внутренний Dashboard enotdoc</h1>
+            <h1>Честный Dashboard enotdoc</h1>
             <p class="lead">
-              Это скрытая внутренняя панель владельца сайта. Она показывает реальное состояние сайта,
-              формы, SEO-базы, аналитики и контура лидов без выдуманных данных.
+              Здесь нет декоративных 100%. Дашборд показывает только реальные данные из GA4,
+              Search Console, Яндекс.Метрики и контура лидов. Если цифр нет, он пишет "нет данных".
             </p>
           </div>
-          <div class="header-note">
-            Спидометры ниже считаются по реальным проверкам на статическом сайте. Там, где нет API-доступа,
-            dashboard честно показывает ограничения.
+          <div class="note">
+            Источник правды: GA4 Data API, Search Console API, Yandex Metrica API и read API лидов.
+            Если источник ещё не подключён до конца, это будет видно здесь.
           </div>
         </div>
 
-        <section class="gauges">
-          <article class="gauge-card">
-            <p class="gauge-label">Сайт</p>
-            <div class="gauge" id="gauge-site">
-              <div class="gauge-inner">
-                <div class="gauge-score" id="score-site">0</div>
-                <div class="gauge-state" id="state-site">Проверка</div>
-              </div>
-            </div>
-            <p class="gauge-caption">Главная, privacy, robots и sitemap.</p>
-          </article>
+        <div id="global-status" class="status-banner">Загружаем реальные данные...</div>
 
-          <article class="gauge-card">
-            <p class="gauge-label">Форма</p>
-            <div class="gauge" id="gauge-form">
-              <div class="gauge-inner">
-                <div class="gauge-score" id="score-form">0</div>
-                <div class="gauge-state" id="state-form">Проверка</div>
-              </div>
-            </div>
-            <p class="gauge-caption">Наличие формы, endpoint и безопасный health-check.</p>
+        <section class="summary-grid">
+          <article class="card">
+            <p class="metric-label">Пользователи</p>
+            <div class="metric-value" id="users-value">нет данных</div>
+            <p class="metric-note">GA4 за последние 28 дней.</p>
           </article>
-
-          <article class="gauge-card">
-            <p class="gauge-label">SEO база</p>
-            <div class="gauge" id="gauge-seo">
-              <div class="gauge-inner">
-                <div class="gauge-score" id="score-seo">0</div>
-                <div class="gauge-state" id="state-seo">Проверка</div>
-              </div>
-            </div>
-            <p class="gauge-caption">robots, sitemap, canonical, title, description, noindex.</p>
+          <article class="card">
+            <p class="metric-label">Сессии</p>
+            <div class="metric-value" id="sessions-value">нет данных</div>
+            <p class="metric-note">GA4 за последние 28 дней.</p>
           </article>
-
-          <article class="gauge-card">
-            <p class="gauge-label">Аналитика</p>
-            <div class="gauge" id="gauge-analytics">
-              <div class="gauge-inner">
-                <div class="gauge-score" id="score-analytics">0</div>
-                <div class="gauge-state" id="state-analytics">Проверка</div>
-              </div>
-            </div>
-            <p class="gauge-caption">Метрика, GA4, Search Console и Webmaster метки.</p>
+          <article class="card">
+            <p class="metric-label">Визиты Метрики</p>
+            <div class="metric-value" id="metrica-visits-value">нет данных</div>
+            <p class="metric-note">Яндекс.Метрика за последние 28 дней.</p>
           </article>
-
-          <article class="gauge-card">
-            <p class="gauge-label">Контур лидов</p>
-            <div class="gauge" id="gauge-leads">
-              <div class="gauge-inner">
-                <div class="gauge-score" id="score-leads">0</div>
-                <div class="gauge-state" id="state-leads">Проверка</div>
-              </div>
-            </div>
-            <p class="gauge-caption">Форма, Apps Script, Telegram, Sheets/API слой.</p>
+          <article class="card">
+            <p class="metric-label">Клики из поиска</p>
+            <div class="metric-value" id="clicks-value">нет данных</div>
+            <p class="metric-note">Search Console за последние 28 дней.</p>
+          </article>
+          <article class="card">
+            <p class="metric-label">Лиды</p>
+            <div class="metric-value" id="leads-value">нет данных</div>
+            <p class="metric-note">Реальные заявки из read API.</p>
           </article>
         </section>
 
         <section class="content-grid">
           <article class="card">
-            <h2>Состояние сайта</h2>
-            <p class="card-intro">Проверка доступности основных файлов сайта через реальные HTTP-запросы.</p>
-            <div class="check-list" id="site-checks"></div>
+            <h2>Трафик</h2>
+            <p class="card-intro">Посещаемость, источники и популярные страницы из GA4.</p>
+            <div class="list" id="traffic-list"></div>
           </article>
 
           <article class="card">
-            <h2>Состояние формы</h2>
-            <p class="card-intro">Проверка формы без отправки тестового лида. Выполняется безопасный health-check endpoint.</p>
-            <div class="check-list" id="form-checks"></div>
+            <h2>Метрика</h2>
+            <p class="card-intro">Поведенческие метрики из Яндекс.Метрики: визиты, отказы, глубина и время.</p>
+            <div class="list" id="metrica-list"></div>
           </article>
 
           <article class="card">
-            <h2>SEO-инфраструктура</h2>
-            <p class="card-intro">Проверка базовых SEO-сигналов на основе живого HTML и служебных файлов.</p>
-            <div class="check-list" id="seo-checks"></div>
+            <h2>Поиск (SEO)</h2>
+            <p class="card-intro">Запросы, показы, клики, CTR и позиции из Search Console.</p>
+            <div class="list" id="seo-list"></div>
           </article>
 
           <article class="card">
-            <h2>Аналитика</h2>
-            <p class="card-intro">Статус интеграций, которые реально найдены в коде лендинга.</p>
-            <div class="check-list" id="analytics-checks"></div>
+            <h2>Поведение</h2>
+            <p class="card-intro">События формы из GA4 и цели из Метрики.</p>
+            <div class="list" id="behavior-list"></div>
+          </article>
+
+          <article class="card">
+            <h2>Воронка</h2>
+            <p class="card-intro">Путь от сессии до лида. Считается только по реально подключённым источникам.</p>
+            <div class="list" id="funnel-list"></div>
           </article>
 
           <article class="card">
             <h2>Лиды</h2>
-            <p class="card-intro">Статус контура захвата лидов и честные ограничения текущего статического сайта.</p>
-            <div class="lead-summary" id="lead-summary">Проверяем данные по лидам...</div>
-            <div style="height: 10px;"></div>
-            <div class="check-list" id="leads-checks"></div>
+            <p class="card-intro">Заявки из Google Apps Script. Тестовые лиды помечены отдельно.</p>
+            <div class="list" id="leads-list"></div>
           </article>
 
           <article class="card">
-            <h2>Центр управления</h2>
-            <p class="card-intro">Быстрые ссылки на кабинеты и инфраструктуру проекта.</p>
-            <div class="actions">
+            <h2>Что подключено</h2>
+            <p class="card-intro">Быстрый статус источников данных для этого дашборда.</p>
+            <div class="list" id="connections-list"></div>
+          </article>
+
+          <article class="card">
+            <h2>Кабинеты</h2>
+            <p class="card-intro">Быстрые ссылки для сверки с исходными кабинетами.</p>
+            <div class="links">
               <a class="link-button" href="https://analytics.google.com/" target="_blank" rel="noopener noreferrer">Google Analytics</a>
               <a class="link-button" href="https://search.google.com/search-console" target="_blank" rel="noopener noreferrer">Google Search Console</a>
               <a class="link-button" href="https://metrika.yandex.ru/" target="_blank" rel="noopener noreferrer">Яндекс.Метрика</a>
-              <a class="link-button" href="https://webmaster.yandex.com/" target="_blank" rel="noopener noreferrer">Яндекс.Вебмастер</a>
               <a class="link-button" href="https://vercel.com/dashboard" target="_blank" rel="noopener noreferrer">Vercel</a>
-              <a class="link-button" href="https://github.com/ktserakhava-beep/enotdoc-site" target="_blank" rel="noopener noreferrer">GitHub репозиторий</a>
             </div>
           </article>
         </section>
 
         <div class="foot-note">
-          Эта страница не защищена сервером и держится только на скрытом URL. Для реальной приватности на Vercel лучше
-          потом добавить edge-защиту, middleware или отдельный приватный backend.
+          Дашборд показывает только данные, которые реально вернули подключённые API. Если блок пустой,
+          значит источник пока не вернул цифры или нужные события ещё не накопились.
         </div>
       </main>
     </div>
 
     <script>
-      (() => {
-        const HOMEPAGE_URL = "./index.html";
-        const PRIVACY_URL = "./privacy.html";
-        const ROBOTS_URL = "./robots.txt";
-        const SITEMAP_URL = "./sitemap.xml";
-        const FORM_ENDPOINT =
-          "https://script.googleusercontent.com/macros/echo?user_content_key=AWDtjMUP5ayEMhDa5KOFtCBd8IujAcUUei0v9Z01lBbkNbdhOw-GejMJOsIv-hl2OSp7q4eGcojUMxwVe9BmoJQO4LhrOY3YZG0YW9vzVNIWeGXvQuaGJwIbvrIpQ8tvbAyWj7r1xG7L3JGWdZ3Q-DTQ1krAeY3b-z3qnkBj3VFlaEySb1il0bveqefcjEymE9yqWwu2VRceROI4ouWIy2tGDSl_NvfKqqm931ayZXBxw5W62m5yrySFtrIQU9r3ch_Fz2l3QNDI4r_y1jlDg_knqeZSsUcigg&lib=M2a8CZ1M1o3HL3NWyGsfBkqFnf-6WjdAd";
-        const buildEndpointUrl = (baseUrl, mode) => {
-          const url = new URL(baseUrl);
-          url.searchParams.set("mode", mode);
-          return url.toString();
-        };
+      const nodes = {
+        globalStatus: document.getElementById("global-status"),
+        users: document.getElementById("users-value"),
+        sessions: document.getElementById("sessions-value"),
+        metricaVisits: document.getElementById("metrica-visits-value"),
+        clicks: document.getElementById("clicks-value"),
+        leads: document.getElementById("leads-value"),
+        traffic: document.getElementById("traffic-list"),
+        metrica: document.getElementById("metrica-list"),
+        seo: document.getElementById("seo-list"),
+        behavior: document.getElementById("behavior-list"),
+        funnel: document.getElementById("funnel-list"),
+        leadsList: document.getElementById("leads-list"),
+        connections: document.getElementById("connections-list"),
+      };
 
-        const FORM_HEALTH_URL = buildEndpointUrl(FORM_ENDPOINT, "health");
-        const LEADS_URL = buildEndpointUrl(FORM_ENDPOINT, "leads");
+      function escapeHtml(value) {
+        return String(value)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#39;");
+      }
 
-        const sections = {
-          site: document.getElementById("site-checks"),
-          form: document.getElementById("form-checks"),
-          seo: document.getElementById("seo-checks"),
-          analytics: document.getElementById("analytics-checks"),
-          leads: document.getElementById("leads-checks"),
-        };
+      function formatNumber(value) {
+        if (value === null || value === undefined || value === "" || Number.isNaN(Number(value))) return "нет данных";
+        return new Intl.NumberFormat("ru-RU").format(Number(value));
+      }
 
-        const gauges = {
-          site: {
-            root: document.getElementById("gauge-site"),
-            score: document.getElementById("score-site"),
-            state: document.getElementById("state-site"),
-          },
-          form: {
-            root: document.getElementById("gauge-form"),
-            score: document.getElementById("score-form"),
-            state: document.getElementById("state-form"),
-          },
-          seo: {
-            root: document.getElementById("gauge-seo"),
-            score: document.getElementById("score-seo"),
-            state: document.getElementById("state-seo"),
-          },
-          analytics: {
-            root: document.getElementById("gauge-analytics"),
-            score: document.getElementById("score-analytics"),
-            state: document.getElementById("state-analytics"),
-          },
-          leads: {
-            root: document.getElementById("gauge-leads"),
-            score: document.getElementById("score-leads"),
-            state: document.getElementById("state-leads"),
-          },
-        };
+      function formatPercent(value) {
+        if (value === null || value === undefined || Number.isNaN(Number(value))) return "нет данных";
+        return `${Number(value).toFixed(2)}%`;
+      }
 
-        const leadSummary = document.getElementById("lead-summary");
+      function formatPosition(value) {
+        if (value === null || value === undefined || Number.isNaN(Number(value))) return "нет данных";
+        return Number(value).toFixed(1);
+      }
 
-        const escapeHtml = (value) =>
-          String(value)
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/"/g, "&quot;")
-            .replace(/'/g, "&#39;");
+      function formatDuration(seconds) {
+        if (!seconds || Number.isNaN(Number(seconds))) return "нет данных";
+        const total = Math.round(Number(seconds));
+        const minutes = Math.floor(total / 60);
+        const rest = String(total % 60).padStart(2, "0");
+        return `${minutes}:${rest}`;
+      }
 
-        const pillLabel = (status) => {
-          if (status === "ok") return "OK";
-          if (status === "warn") return "Внимание";
-          if (status === "fail") return "Проблема";
-          return "Нет данных";
-        };
+      function conversionRate(part, total) {
+        const partNumber = Number(part || 0);
+        const totalNumber = Number(total || 0);
+        if (!totalNumber) return "нет данных";
+        return `${((partNumber / totalNumber) * 100).toFixed(1)}%`;
+      }
 
-        const addItem = (root, label, status, extra) => {
-          const item = document.createElement("div");
-          item.className = "check-item";
-          item.innerHTML = `
-            <div>
-              <span class="check-label">${escapeHtml(label)}</span>
-              ${extra ? `<span class="check-extra">${escapeHtml(extra)}</span>` : ""}
+      function pillClass(status) {
+        return status || "neutral";
+      }
+
+      function renderList(root, items) {
+        if (!items.length) {
+          root.innerHTML = `
+            <div class="list-item">
+              <div>
+                <strong>нет данных</strong>
+                <div class="list-meta">Источник ещё не подключён или пока не вернул цифры.</div>
+              </div>
+              <span class="pill neutral">нет данных</span>
             </div>
-            <span class="status-pill ${status}">${pillLabel(status)}</span>
           `;
-          root.appendChild(item);
-        };
+          return;
+        }
 
-        const fetchText = async (url) => {
-          const response = await fetch(url, {
-            method: "GET",
-            cache: "no-store",
-          });
+        root.innerHTML = items
+          .map((item) => {
+            const meta = item.meta ? `<div class="list-meta">${escapeHtml(item.meta)}</div>` : "";
+            return `
+              <div class="list-item">
+                <div>
+                  <strong>${escapeHtml(item.label)}</strong>
+                  ${meta}
+                </div>
+                <span class="pill ${pillClass(item.status)}">${escapeHtml(item.value)}</span>
+              </div>
+            `;
+          })
+          .join("");
+      }
 
+      function renderLeadList(root, leads) {
+        if (!leads.length) {
+          renderList(root, []);
+          return;
+        }
+
+        root.innerHTML = leads
+          .map((lead) => {
+            const company = escapeHtml(lead.company || "Без компании");
+            const source = escapeHtml(lead.source || "website");
+            const contact = lead.contact ? ` · ${escapeHtml(lead.contact)}` : "";
+            const date = escapeHtml(lead.createdAt || "нет даты");
+            const isDebug = /debug|test|audit|site-check/i.test(`${lead.source || ""} ${lead.company || ""}`);
+
+            return `
+              <div class="list-item lead-item${isDebug ? " is-debug" : ""}">
+                <div>
+                  <strong>${company}</strong>
+                  <div class="list-meta">${source}${contact}</div>
+                  <div class="lead-date">${date}</div>
+                </div>
+              </div>
+            `;
+          })
+          .join("");
+      }
+
+      function getDashboardToken() {
+        const params = new URLSearchParams(window.location.search);
+        const urlToken = params.get("token");
+        if (urlToken) {
+          sessionStorage.setItem("dashboard_token", urlToken);
+          params.delete("token");
+          const cleanUrl = `${window.location.pathname}${params.toString() ? `?${params}` : ""}${window.location.hash}`;
+          window.history.replaceState({}, "", cleanUrl);
+          return urlToken;
+        }
+
+        const savedToken = sessionStorage.getItem("dashboard_token");
+        if (savedToken) return savedToken;
+
+        const enteredToken = window.prompt("Dashboard token");
+        if (enteredToken) {
+          sessionStorage.setItem("dashboard_token", enteredToken);
+        }
+        return enteredToken || "";
+      }
+
+      async function fetchJson(url, token) {
+        const response = await fetch(url, {
+          cache: "no-store",
+          headers: {
+            "x-dashboard-token": token,
+          },
+        });
+        const data = await response.json();
+
+        if (!response.ok || !data.ok) {
+          throw new Error(data.details || data.error || `Request failed: ${url}`);
+        }
+
+        return data;
+      }
+
+      async function fetchOptionalJson(url, token) {
+        try {
+          return await fetchJson(url, token);
+        } catch (error) {
           return {
-            ok: response.ok,
-            status: response.status,
-            text: await response.text(),
+            ok: false,
+            connected: false,
+            error: error.message,
           };
-        };
+        }
+      }
 
-        const fetchHead = async (url) => {
-          try {
-            const response = await fetch(url, {
-              method: "HEAD",
-              cache: "no-store",
-            });
-
-            return { ok: response.ok, status: response.status, mode: "HEAD" };
-          } catch {
-            const fallback = await fetch(url, {
-              method: "GET",
-              cache: "no-store",
-            });
-
-            return { ok: fallback.ok, status: fallback.status, mode: "GET" };
-          }
-        };
-
-        const fetchJson = async (url) => {
-          const response = await fetch(url, {
-            method: "GET",
-            cache: "no-store",
-          });
-
-          let data = null;
-
-          try {
-            data = await response.json();
-          } catch {
-            data = null;
-          }
-
-          return {
-            ok: response.ok,
-            status: response.status,
-            data: data,
-          };
-        };
-
-        const detectMetaByName = (html, name) => {
-          const pattern = new RegExp(
-            `<meta\\s+[^>]*name=(["'])${name}\\1[^>]*content=(["'])([\\s\\S]*?)\\2[^>]*>`,
-            "i"
-          );
-          return pattern.test(html);
-        };
-
-        const detectCanonical = (html) => /<link\s+[^>]*rel=(["'])canonical\1[^>]*href=(["'])([\s\S]*?)\2[^>]*>/i.test(html);
-        const detectTitle = (html) => /<title[^>]*>[\s\S]*?<\/title>/i.test(html);
-        const detectDescription = (html) => detectMetaByName(html, "description");
-        const detectRobotsMeta = (html) => {
-          const match = html.match(/<meta\s+[^>]*name=(["'])robots\1[^>]*content=(["'])([\s\S]*?)\2[^>]*>/i);
-          return match ? match[3] : "";
-        };
-
-        const getTone = (score) => {
-          if (score >= 85) return { tone: "var(--success)", label: "Хорошо" };
-          if (score >= 60) return { tone: "var(--warning)", label: "Средне" };
-          return { tone: "var(--error)", label: "Слабо" };
-        };
-
-        const setGauge = (key, score) => {
-          const rounded = Math.max(0, Math.min(100, Math.round(score)));
-          const tone = getTone(rounded);
-          gauges[key].root.style.setProperty("--value", rounded);
-          gauges[key].root.style.setProperty("--tone", tone.tone);
-          gauges[key].score.textContent = rounded;
-          gauges[key].state.textContent = tone.label;
-        };
-
-        const runDashboard = async () => {
-          const [homeDoc, privacyDoc, robotsDoc, sitemapDoc, formProbe, leadsProbe] = await Promise.allSettled([
-            fetchText(HOMEPAGE_URL),
-            fetchHead(PRIVACY_URL),
-            fetchText(ROBOTS_URL),
-            fetchText(SITEMAP_URL),
-            fetchJson(FORM_HEALTH_URL),
-            fetchJson(LEADS_URL),
+      async function bootstrap() {
+        try {
+          const dashboardToken = getDashboardToken();
+          const [ga4, searchConsole, leads, metrica] = await Promise.all([
+            fetchJson("/api/ga4", dashboardToken),
+            fetchJson("/api/search-console", dashboardToken),
+            fetchJson("/api/leads", dashboardToken),
+            fetchOptionalJson("/api/metrica", dashboardToken),
           ]);
 
-          const home = homeDoc.status === "fulfilled" ? homeDoc.value : { ok: false, status: 0, text: "" };
-          const privacy = privacyDoc.status === "fulfilled" ? privacyDoc.value : { ok: false, status: 0 };
-          const robots = robotsDoc.status === "fulfilled" ? robotsDoc.value : { ok: false, status: 0, text: "" };
-          const sitemap = sitemapDoc.status === "fulfilled" ? sitemapDoc.value : { ok: false, status: 0, text: "" };
-          const formStatus = formProbe.status === "fulfilled" ? formProbe.value : { ok: false, status: 0, data: null };
-          const leadsStatus = leadsProbe.status === "fulfilled" ? leadsProbe.value : { ok: false, status: 0, data: null };
+          nodes.globalStatus.className = "status-banner";
+          nodes.globalStatus.textContent = "Дашборд показывает только реальные данные из подключённых источников.";
 
-          const homepageHasForm =
-            /<form[\s\S]*id=(["'])intake-form\1/i.test(home.text) &&
-            /<form[\s\S]*action=(["'])(https:\/\/script\.google(?:usercontent)?\.com\/[\s\S]*?)\1/i.test(home.text);
+          nodes.users.textContent = formatNumber(ga4.users);
+          nodes.sessions.textContent = formatNumber(ga4.sessions);
+          nodes.metricaVisits.textContent = metrica.connected ? formatNumber(metrica.visits) : "нет данных";
+          nodes.clicks.textContent = formatNumber(searchConsole.clicks);
+          nodes.leads.textContent = leads.ok ? formatNumber(leads.count || 0) : "нет данных";
 
-          const analyticsInstalled = {
-            yandexMetrika:
-              /mc\.yandex\.ru\/metrika\/tag\.js/i.test(home.text) &&
-              /YANDEX_METRIKA_ID/i.test(home.text),
-            ga4:
-              /googletagmanager\.com\/gtag\/js\?id=/i.test(home.text) &&
-              /GA4_MEASUREMENT_ID/i.test(home.text),
-            gscMeta: /google-site-verification/i.test(home.text),
-            yandexWebmasterMeta: /yandex-verification/i.test(home.text),
-          };
+          renderList(nodes.traffic, [
+            {
+              label: "Пользователи",
+              value: formatNumber(ga4.users),
+              status: ga4.users > 0 ? "ok" : "warn",
+              meta: `Сессии: ${formatNumber(ga4.sessions)}. Просмотры страниц: ${formatNumber(ga4.pageViews)}.`,
+            },
+            ...((ga4.sources || []).length
+              ? ga4.sources.map((item) => ({
+                  label: item.sessionSourceMedium || "unknown / unknown",
+                  value: formatNumber(item.sessions),
+                  status: "neutral",
+                  meta: "Источник / канал трафика",
+                }))
+              : []),
+            ...((ga4.topPages || []).length
+              ? ga4.topPages.map((item) => ({
+                  label: item.pagePath || "/",
+                  value: formatNumber(item.screenPageViews),
+                  status: "neutral",
+                  meta: `Сессии на странице: ${formatNumber(item.sessions)}`,
+                }))
+              : []),
+          ]);
 
-          const robotsAvailable = robots.ok && /User-agent:/i.test(robots.text);
-          const sitemapAvailable = sitemap.ok && /<urlset/i.test(sitemap.text);
-          const canonicalFound = detectCanonical(home.text);
-          const titleFound = detectTitle(home.text);
-          const descriptionFound = detectDescription(home.text);
-          const robotsMetaContent = detectRobotsMeta(home.text);
-          const noindexFound = /noindex/i.test(robotsMetaContent);
+          renderList(nodes.metrica, metrica.connected
+            ? [
+                {
+                  label: "Визиты",
+                  value: formatNumber(metrica.visits),
+                  status: metrica.visits > 0 ? "ok" : "warn",
+                  meta: `Посетители: ${formatNumber(metrica.users)}. Просмотры: ${formatNumber(metrica.pageViews)}.`,
+                },
+                {
+                  label: "Отказы",
+                  value: formatPercent(metrica.bounceRate),
+                  status: "neutral",
+                  meta: `Глубина просмотра: ${formatPosition(metrica.pageDepth)}. Время на сайте: ${formatDuration(metrica.avgVisitDurationSeconds)}.`,
+                },
+                {
+                  label: "Цели Метрики",
+                  value: formatNumber(metrica.goalReaches),
+                  status: metrica.goalReaches > 0 ? "ok" : "warn",
+                  meta: `Конверсия по целям: ${formatPercent(metrica.goalConversionRate)}.`,
+                },
+                ...((metrica.sources || []).length
+                  ? metrica.sources.map((item) => ({
+                      label: item.source || "Источник не определён",
+                      value: formatNumber(item.visits),
+                      status: "neutral",
+                      meta: `Пользователи: ${formatNumber(item.users)}. Отказы: ${formatPercent(item.bounceRate)}.`,
+                    }))
+                  : []),
+              ]
+            : [
+                {
+                  label: "Yandex Metrica API",
+                  value: "нет данных",
+                  status: "warn",
+                  meta: metrica.error || metrica.reason || "API Метрики пока не вернул данные.",
+                },
+              ]);
 
-          addItem(sections.site, "Главная страница", home.ok ? "ok" : "fail", home.ok ? `HTTP ${home.status}` : "Главная страница не отвечает");
-          addItem(sections.site, "Privacy page", privacy.ok ? "ok" : "fail", privacy.ok ? `HTTP ${privacy.status}` : "privacy.html не отвечает");
-          addItem(sections.site, "robots.txt", robotsAvailable ? "ok" : "fail", robotsAvailable ? `HTTP ${robots.status}` : "robots.txt не найден или пуст");
-          addItem(sections.site, "sitemap.xml", sitemapAvailable ? "ok" : "fail", sitemapAvailable ? `HTTP ${sitemap.status}` : "sitemap.xml не найден или невалиден");
+          renderList(nodes.seo, [
+            {
+              label: "Итого за 28 дней",
+              value: formatNumber(searchConsole.clicks),
+              status: searchConsole.clicks > 0 ? "ok" : "warn",
+              meta: `Показы: ${formatNumber(searchConsole.impressions)}. CTR: ${formatPercent(Number(searchConsole.ctr || 0) * 100)}. Средняя позиция: ${formatPosition(searchConsole.averagePosition)}.`,
+            },
+            ...((searchConsole.queries || []).length
+              ? searchConsole.queries.map((item) => ({
+                  label: item.query || "нет запроса",
+                  value: formatNumber(item.clicks),
+                  status: item.clicks > 0 ? "ok" : "neutral",
+                  meta: `Показы: ${formatNumber(item.impressions)}. CTR: ${formatPercent(Number(item.ctr || 0) * 100)}. Позиция: ${formatPosition(item.position)}.`,
+                }))
+              : []),
+          ]);
 
-          addItem(sections.form, "Форма найдена на лендинге", homepageHasForm ? "ok" : "fail", homepageHasForm ? "Форма и endpoint присутствуют в HTML" : "Форма или endpoint не найдены");
-          addItem(
-            sections.form,
-            "Health-check формы",
-            formStatus.ok && formStatus.data && formStatus.data.ok ? "ok" : "warn",
-            formStatus.ok && formStatus.data && formStatus.data.ok
-              ? `HTTP ${formStatus.status}, mode=health`
-              : "Health-check не дал уверенного подтверждения"
-          );
-          addItem(
-            sections.form,
-            "Тестовый лид из dashboard",
-            "neutral",
-            "Не выполняется специально, чтобы не засорять рабочий контур лидов"
-          );
+          const eventCounts = ga4.eventCounts || {};
+          const formSubmitCount = eventCounts.form_submit || 0;
+          const formStartCount = eventCounts.form_start || 0;
+          const scrollToFormCount = eventCounts.scroll_to_form || 0;
+          const leadEventCount = eventCounts.lead || 0;
+          const realLeadCount = Number(leads.count || 0);
 
-          addItem(sections.seo, "robots.txt есть", robotsAvailable ? "ok" : "fail", robotsAvailable ? "Файл доступен" : "Файл отсутствует");
-          addItem(sections.seo, "sitemap.xml есть", sitemapAvailable ? "ok" : "fail", sitemapAvailable ? "Файл доступен" : "Файл отсутствует");
-          addItem(sections.seo, "canonical найден", canonicalFound ? "ok" : "fail");
-          addItem(sections.seo, "title найден", titleFound ? "ok" : "fail");
-          addItem(sections.seo, "meta description найдена", descriptionFound ? "ok" : "fail");
-          addItem(
-            sections.seo,
-            "noindex meta на главной",
-            noindexFound ? "warn" : "ok",
-            noindexFound ? `Найдено: ${robotsMetaContent}` : "На главной noindex не найден"
-          );
+          renderList(nodes.behavior, [
+            {
+              label: "Дошли до формы",
+              value: scrollToFormCount ? formatNumber(scrollToFormCount) : "нет данных",
+              status: scrollToFormCount ? "ok" : "warn",
+              meta: "Событие scroll_to_form из GA4.",
+            },
+            {
+              label: "Начали форму",
+              value: formStartCount ? formatNumber(formStartCount) : "нет данных",
+              status: formStartCount ? "ok" : "warn",
+              meta: "Событие form_start из GA4.",
+            },
+            {
+              label: "Отправили форму",
+              value: formSubmitCount ? formatNumber(formSubmitCount) : "нет данных",
+              status: formSubmitCount ? "ok" : "warn",
+              meta: "Событие form_submit из GA4.",
+            },
+            {
+              label: "Цели Метрики",
+              value: metrica.connected ? formatNumber(metrica.goalReaches) : "нет данных",
+              status: metrica.connected && metrica.goalReaches > 0 ? "ok" : "warn",
+              meta: "Все достижения целей, которые вернул Yandex Metrica API.",
+            },
+          ]);
 
-          addItem(sections.analytics, "Яндекс.Метрика в коде", analyticsInstalled.yandexMetrika ? "ok" : "fail");
-          addItem(sections.analytics, "GA4 в коде", analyticsInstalled.ga4 ? "ok" : "fail");
-          addItem(sections.analytics, "Google Search Console meta", analyticsInstalled.gscMeta ? "ok" : "warn", analyticsInstalled.gscMeta ? "Meta verification tag найден" : "Meta verification tag не найден");
-          addItem(sections.analytics, "Yandex Webmaster meta", analyticsInstalled.yandexWebmasterMeta ? "ok" : "warn", analyticsInstalled.yandexWebmasterMeta ? "Meta verification tag найден" : "Meta verification tag не найден");
-          addItem(
-            sections.analytics,
-            "Реальные цифры трафика",
-            "neutral",
-            "Без API не подтягиваются. Открываются по кнопкам во внешних кабинетах."
-          );
+          renderList(nodes.funnel, [
+            {
+              label: "Сессии",
+              value: formatNumber(ga4.sessions),
+              status: ga4.sessions > 0 ? "ok" : "warn",
+              meta: "Все сессии из GA4 за период.",
+            },
+            {
+              label: "Начали форму",
+              value: formatNumber(formStartCount),
+              status: formStartCount > 0 ? "ok" : "warn",
+              meta: `Конверсия из сессий: ${conversionRate(formStartCount, ga4.sessions)}.`,
+            },
+            {
+              label: "Отправили форму",
+              value: formatNumber(formSubmitCount),
+              status: formSubmitCount > 0 ? "ok" : "warn",
+              meta: `Конверсия из начала формы: ${conversionRate(formSubmitCount, formStartCount)}.`,
+            },
+            {
+              label: "Лид записан",
+              value: formatNumber(realLeadCount),
+              status: realLeadCount > 0 ? "ok" : "warn",
+              meta: `GA4 lead events: ${formatNumber(leadEventCount)}. Конверсия сессия → лид: ${conversionRate(realLeadCount, ga4.sessions)}.`,
+            },
+          ]);
 
-          addItem(sections.leads, "Форма -> Apps Script", homepageHasForm ? "ok" : "fail", homepageHasForm ? "Контур формы найден в коде" : "Контур не обнаружен");
-          addItem(
-            sections.leads,
-            "Telegram-уведомления",
-            "ok",
-            "По вашей проверке лиды доходят. Из dashboard это не подтверждается без отдельного API."
-          );
-          addItem(
-            sections.leads,
-            "Google Sheets / последние лиды",
-            leadsStatus.ok && leadsStatus.data && leadsStatus.data.ok ? "ok" : "warn",
-            leadsStatus.ok && leadsStatus.data && leadsStatus.data.ok
-              ? `Получены данные по mode=leads, всего лидов: ${leadsStatus.data.count || 0}`
-              : "Данные лидов не подтянулись через read API"
-          );
+          const latestLeads = Array.isArray(leads.latestLeads) ? leads.latestLeads : [];
+          renderLeadList(nodes.leadsList, [
+            {
+              company: "Всего лидов",
+              source: leads.ok ? `Лидов: ${formatNumber(leads.count || 0)}` : "нет данных",
+              contact: leads.ok ? `последний: ${leads.lastLeadAt || "нет данных"}` : (leads.reason || "Lead API не вернул данные."),
+              createdAt: "",
+            },
+            ...latestLeads.slice(0, 5),
+          ]);
 
-          if (leadsStatus.ok && leadsStatus.data && leadsStatus.data.ok) {
-            const latestLeads = Array.isArray(leadsStatus.data.latestLeads) ? leadsStatus.data.latestLeads : [];
-            const preview = latestLeads
-              .slice(0, 3)
-              .map((lead) => {
-                const company = safeText_(lead.company);
-                const source = safeText_(lead.source);
-                const createdAt = safeText_(lead.createdAt);
-                return `${company || "Без компании"} · ${source || "website"} · ${createdAt || "без даты"}`;
-              })
-              .join("\n");
+          renderList(nodes.connections, [
+            {
+              label: "GA4 Data API",
+              value: "подключен",
+              status: "ok",
+              meta: `Пользователи: ${formatNumber(ga4.users)}.`,
+            },
+            {
+              label: "Search Console API",
+              value: "подключен",
+              status: "ok",
+              meta: `Клики: ${formatNumber(searchConsole.clicks)}. Запросов: ${formatNumber((searchConsole.queries || []).length)}.`,
+            },
+            {
+              label: "Lead read API",
+              value: leads.ok ? "подключен" : "частично",
+              status: leads.ok ? "ok" : "warn",
+              meta: leads.ok ? `Лидов: ${formatNumber(leads.count || 0)}.` : (leads.reason || "Нет ответа от lead API."),
+            },
+            {
+              label: "Yandex Metrica API",
+              value: metrica.connected ? "подключен" : "не подключен",
+              status: metrica.connected ? "ok" : "warn",
+              meta: metrica.connected ? `Визитов: ${formatNumber(metrica.visits)}. Счётчик: ${metrica.counterId}.` : (metrica.error || metrica.reason || "Нет ответа от API Метрики."),
+            },
+          ]);
+        } catch (error) {
+          nodes.globalStatus.className = "status-banner error";
+          nodes.globalStatus.textContent = `Ошибка загрузки данных: ${error.message}`;
 
-            leadSummary.innerHTML =
-              "<strong>Всего лидов:</strong> " + escapeHtml(leadsStatus.data.count || 0) + "<br />" +
-              "<strong>Последний лид:</strong> " + escapeHtml(leadsStatus.data.lastLeadAt || "нет данных") + "<br />" +
-              "<strong>Последние заявки:</strong><br />" +
-              (preview ? `<span style="white-space: pre-line;">${escapeHtml(preview)}</span>` : "нет данных");
-          } else {
-            leadSummary.innerHTML =
-              "Dashboard пока не получил данные из read API. " +
-              "Проверь, что опубликована актуальная версия Apps Script с <strong>?mode=leads</strong>.";
-          }
-
-          const siteScore = [home.ok, privacy.ok, robotsAvailable, sitemapAvailable].filter(Boolean).length * 25;
-          const formScore =
-            (homepageHasForm ? 45 : 0) +
-            (formStatus.ok && formStatus.data && formStatus.data.ok ? 45 : 0) +
-            10;
-          const seoScore = [robotsAvailable, sitemapAvailable, canonicalFound, titleFound, descriptionFound, !noindexFound].filter(Boolean).length * (100 / 6);
-          const analyticsScore = [analyticsInstalled.yandexMetrika, analyticsInstalled.ga4, analyticsInstalled.gscMeta, analyticsInstalled.yandexWebmasterMeta].filter(Boolean).length * 25;
-          const leadsScore =
-            (homepageHasForm ? 30 : 0) +
-            (formStatus.ok && formStatus.data && formStatus.data.ok ? 20 : 0) +
-            20 +
-            (leadsStatus.ok && leadsStatus.data && leadsStatus.data.ok ? 30 : 0);
-
-          setGauge("site", siteScore);
-          setGauge("form", formScore);
-          setGauge("seo", seoScore);
-          setGauge("analytics", analyticsScore);
-          setGauge("leads", leadsScore);
-        };
-
-        runDashboard().catch(() => {
-          setGauge("site", 0);
-          setGauge("form", 0);
-          setGauge("seo", 0);
-          setGauge("analytics", 0);
-          setGauge("leads", 0);
-        });
-
-        function safeText_(value) {
-          return String(value || "").trim();
+          renderList(nodes.traffic, []);
+          renderList(nodes.metrica, []);
+          renderList(nodes.seo, []);
+          renderList(nodes.behavior, []);
+          renderList(nodes.funnel, []);
+          renderList(nodes.leadsList, []);
+          renderList(nodes.connections, []);
         }
-      })();
+      }
+
+      bootstrap();
     </script>
   </body>
 </html>
