@@ -757,9 +757,9 @@ li {
 
 .result-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
-  align-items: start;
+  align-items: stretch;
 }
 
 .result-stack,
@@ -771,6 +771,7 @@ li {
 
 .result-panel {
   padding: 22px;
+  min-height: 290px;
 }
 
 .result-panel h3 {
@@ -823,22 +824,52 @@ li {
 }
 
 .faq-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr;
 }
 
-.faq-card {
-  padding: 22px;
+.faq-accordion {
+  gap: 12px;
 }
 
-.faq-card h3 {
-  max-width: 21ch;
-  margin-bottom: 10px;
-  font-size: 1.14rem;
-  line-height: 1.25;
+.faq-item {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: #fff;
+  padding: 0 18px;
 }
 
-.faq-card p {
-  margin: 0;
+.faq-item summary {
+  list-style: none;
+  cursor: pointer;
+  position: relative;
+  padding: 18px 34px 18px 0;
+  font-family: "Manrope", sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item summary::after {
+  content: "›";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%) rotate(90deg);
+  font-size: 1.35rem;
+  color: var(--muted);
+  transition: transform 180ms ease;
+}
+
+.faq-item[open] summary::after {
+  transform: translateY(-50%) rotate(-90deg);
+}
+
+.faq-item p {
+  margin: 0 0 18px;
   font-size: 0.95rem;
 }
 
@@ -1453,6 +1484,37 @@ h1, h2, h3 {
 
 .site-chat-submit {
   width: 100%;
+}
+
+.heading-compact {
+  max-width: 22ch;
+}
+
+.section-text-compact {
+  max-width: 69ch;
+}
+
+.section-text-result {
+  max-width: 74ch;
+}
+
+.portrait-grid-steps {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.portrait-grid-steps .mini-card {
+  min-height: 220px;
+}
+
+.portrait-grid-steps .mini-card strong {
+  white-space: nowrap;
+}
+
+.portrait-grid-steps .mini-card span {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 @media (max-width: 640px) {
