@@ -4,9 +4,23 @@
 
 Add these variables in Vercel:
 
+- `DASHBOARD_TOKEN`
 - `GOOGLE_CREDENTIALS`
 - `GA4_PROPERTY_ID`
 - `SEARCH_CONSOLE_SITE_URL`
+- `FORM_ENDPOINT`
+- `YANDEX_METRIKA_TOKEN` (optional, recommended)
+- `YANDEX_METRIKA_COUNTER_ID` (optional, recommended)
+
+### `DASHBOARD_TOKEN`
+
+Shared secret token for internal dashboard/API access.
+
+Example:
+
+```text
+replace-with-long-random-token
+```
 
 ### `GOOGLE_CREDENTIALS`
 
@@ -36,6 +50,16 @@ Example:
 
 ```text
 https://enotdoc.vercel.app/
+```
+
+### `FORM_ENDPOINT`
+
+Google Apps Script endpoint used for form submit and lead read mode.
+
+Example:
+
+```text
+https://script.google.com/macros/s/...../exec
 ```
 
 ## 2. Google-side access
@@ -82,22 +106,21 @@ Check these URLs:
 
 - `/api/ga4`
 - `/api/search-console`
+- `/api/leads`
+- `/api/metrica`
 - `/dashboard.html`
 
 Expected behavior:
 
-- if API access works, endpoints return JSON with `ok: true`
+- without token, protected endpoints return `401 Unauthorized`
+- with valid `x-dashboard-token`, API endpoints return JSON with `ok: true`
 - if data is unavailable, dashboard shows `нет данных`
 - dashboard must not show fake `100%`
 
-## 6. What is still missing for full honesty
+## 6. Metrica notes
 
-This version gives real Google data, but full behavior analytics still needs:
+Yandex Metrica API is optional in code, but recommended for behavior metrics:
 
-- `Yandex Metrica API`
-
-That is needed for:
-
-- click maps
-- scroll depth from Metrica
-- Webvisor-style behavioral reporting
+- visit quality metrics
+- source breakdown
+- goal reach metrics
