@@ -275,17 +275,24 @@
               и подрядчиками, а нужно быстро понять текущую картину и не начинать с хаоса.
             </p>
           </div>
-          <div class="portrait-grid">
-            <article class="mini-card"><strong>Собственнику</strong><span>понять, где есть порядок, а где не хватает ясности.</span></article>
-            <article class="mini-card"><strong>Бухгалтеру</strong><span>собрать вопросы без попытки стать экологом.</span></article>
-            <article class="mini-card"><strong>Директору</strong><span>увидеть следующий шаг до лишних расходов.</span></article>
-            <article class="mini-card"><strong>Администратору</strong><span>описать ситуацию простыми словами и не ошибиться на старте.</span></article>
-            <article class="mini-card"><strong>Перед отчетным периодом</strong><span>понять, на каких исходных материалах все держится.</span></article>
-            <article class="mini-card"><strong>Перед внутренним запросом</strong><span>быстро собрать документы, которые стоит поднять первыми.</span></article>
-            <article class="mini-card"><strong>Без штатного эколога</strong><span>не держать документы только в голове и переписке.</span></article>
-            <article class="mini-card"><strong>После смены подрядчика</strong><span>понять, что осталось, что актуально и что запросить.</span></article>
-            <article class="mini-card"><strong>Для малого бизнеса</strong><span>начать с понятной карты, а не с полного переоформления.</span></article>
-            <article class="mini-card"><strong>Для экологов</strong><span>получать подготовленные вводные, а не хаотичную папку.</span></article>
+          <div class="persona-slider" data-slider="persona">
+            <div class="persona-slider-track portrait-grid" id="persona-slider-track">
+              <article class="mini-card persona-slide"><strong>Собственнику</strong><span>понять, где есть порядок, а где не хватает ясности.</span></article>
+              <article class="mini-card persona-slide"><strong>Бухгалтеру</strong><span>собрать вопросы без попытки стать экологом.</span></article>
+              <article class="mini-card persona-slide"><strong>Директору</strong><span>увидеть следующий шаг до лишних расходов.</span></article>
+              <article class="mini-card persona-slide"><strong>Администратору</strong><span>описать ситуацию простыми словами и не ошибиться на старте.</span></article>
+              <article class="mini-card persona-slide"><strong>Перед отчетным периодом</strong><span>понять, на каких исходных материалах все держится.</span></article>
+              <article class="mini-card persona-slide"><strong>Перед внутренним запросом</strong><span>быстро собрать документы, которые стоит поднять первыми.</span></article>
+              <article class="mini-card persona-slide"><strong>Без штатного эколога</strong><span>не держать документы только в голове и переписке.</span></article>
+              <article class="mini-card persona-slide"><strong>После смены подрядчика</strong><span>понять, что осталось, что актуально и что запросить.</span></article>
+              <article class="mini-card persona-slide"><strong>Для малого бизнеса</strong><span>начать с понятной карты, а не с полного переоформления.</span></article>
+              <article class="mini-card persona-slide"><strong>Для экологов</strong><span>получать подготовленные вводные, а не хаотичную папку.</span></article>
+            </div>
+            <div class="persona-slider-controls" aria-label="Навигация по карточкам">
+              <button class="persona-slider-button" type="button" data-slider-prev aria-label="Предыдущие карточки">‹</button>
+              <div class="persona-slider-dots" data-slider-dots></div>
+              <button class="persona-slider-button" type="button" data-slider-next aria-label="Следующие карточки">›</button>
+            </div>
           </div>
         </section>
 
@@ -536,6 +543,110 @@
 
     <script>
       (() => {
+        const personaSlider = document.querySelector('[data-slider="persona"]');
+        if (personaSlider) {
+          const track = personaSlider.querySelector(".persona-slider-track");
+          const slides = Array.from(personaSlider.querySelectorAll(".persona-slide"));
+          const prevButton = personaSlider.querySelector("[data-slider-prev]");
+          const nextButton = personaSlider.querySelector("[data-slider-next]");
+          const dotsWrap = personaSlider.querySelector("[data-slider-dots]");
+          let index = 0;
+          let autoplayId = null;
+
+          const getStep = () => {
+            const slide = slides[0];
+            if (!slide) return 0;
+            const gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || "0");
+            return slide.getBoundingClientRect().width + gap;
+          };
+
+          const visibleCount = () => {
+            const step = getStep();
+            if (!step) return 1;
+            return Math.max(1, Math.round(track.clientWidth / step));
+          };
+
+          const pageCount = () => Math.max(1, slides.length - visibleCount() + 1);
+
+          const renderDots = () => {
+            if (!dotsWrap) return;
+            dotsWrap.innerHTML = "";
+            for (let i = 0; i < pageCount(); i += 1) {
+              const dot = document.createElement("button");
+              dot.type = "button";
+              dot.className = "persona-slider-dot";
+              dot.setAttribute("aria-label", `Перейти к позиции ${i + 1}`);
+              dot.addEventListener("click", () => goTo(i));
+              dotsWrap.appendChild(dot);
+            }
+          };
+
+          const syncDots = () => {
+            const dots = dotsWrap ? Array.from(dotsWrap.children) : [];
+            dots.forEach((dot, dotIndex) => {
+              dot.classList.toggle("is-active", dotIndex === index);
+            });
+          };
+
+          const goTo = (nextIndex) => {
+            index = Math.max(0, Math.min(nextIndex, pageCount() - 1));
+            track.scrollTo({ left: getStep() * index, behavior: "smooth" });
+            syncDots();
+          };
+
+          const next = () => {
+            const lastIndex = pageCount() - 1;
+            goTo(index >= lastIndex ? 0 : index + 1);
+          };
+
+          const prev = () => {
+            const lastIndex = pageCount() - 1;
+            goTo(index <= 0 ? lastIndex : index - 1);
+          };
+
+          const stopAutoplay = () => {
+            if (!autoplayId) return;
+            window.clearInterval(autoplayId);
+            autoplayId = null;
+          };
+
+          const startAutoplay = () => {
+            stopAutoplay();
+            autoplayId = window.setInterval(next, 4200);
+          };
+
+          track.addEventListener("scroll", () => {
+            const step = getStep();
+            if (!step) return;
+            index = Math.max(0, Math.min(Math.round(track.scrollLeft / step), pageCount() - 1));
+            syncDots();
+          }, { passive: true });
+
+          prevButton?.addEventListener("click", () => {
+            prev();
+            startAutoplay();
+          });
+
+          nextButton?.addEventListener("click", () => {
+            next();
+            startAutoplay();
+          });
+
+          personaSlider.addEventListener("mouseenter", stopAutoplay);
+          personaSlider.addEventListener("mouseleave", startAutoplay);
+          personaSlider.addEventListener("focusin", stopAutoplay);
+          personaSlider.addEventListener("focusout", startAutoplay);
+
+          window.addEventListener("resize", () => {
+            renderDots();
+            goTo(Math.min(index, pageCount() - 1));
+          });
+
+          renderDots();
+          goTo(0);
+          startAutoplay();
+        }
+
         const topbar = document.querySelector(".topbar");
         const menuToggle = document.querySelector(".menu-toggle");
         const mobileMenu = document.getElementById("mobile-menu");

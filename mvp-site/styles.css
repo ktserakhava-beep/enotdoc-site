@@ -445,6 +445,69 @@ li {
   gap: 12px;
 }
 
+.persona-slider {
+  display: grid;
+  gap: 18px;
+}
+
+.persona-slider-track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% - 36px) / 4);
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.persona-slider-track::-webkit-scrollbar {
+  display: none;
+}
+
+.persona-slide {
+  scroll-snap-align: start;
+  min-height: 132px;
+}
+
+.persona-slider-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+.persona-slider-button {
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 251, 245, 0.9);
+  color: var(--text);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.persona-slider-dots {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.persona-slider-dot {
+  width: 10px;
+  height: 10px;
+  border: none;
+  border-radius: 999px;
+  background: rgba(23, 21, 17, 0.18);
+  cursor: pointer;
+}
+
+.persona-slider-dot.is-active {
+  background: var(--accent-2);
+}
+
 .mini-card {
   display: grid;
   gap: 8px;
@@ -1085,6 +1148,10 @@ li {
 /* Responsive */
 
 @media (max-width: 1100px) {
+  .persona-slider-track {
+    grid-auto-columns: calc((100% - 12px) / 2);
+  }
+
   .topbar {
     position: sticky;
     min-height: 56px;
@@ -1305,6 +1372,10 @@ li {
 }
 
 @media (max-width: 640px) {
+  .persona-slider-track {
+    grid-auto-columns: 100%;
+  }
+
   .topbar {
     min-height: 52px;
     padding: 8px 12px;
