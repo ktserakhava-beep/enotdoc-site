@@ -481,12 +481,23 @@ li {
   height: 150px;
   margin-bottom: 18px;
   border-radius: 18px;
-  background:
-    radial-gradient(circle at 20% 20%, rgba(191, 123, 66, 0.18), transparent 36%),
-    radial-gradient(circle at 80% 0%, rgba(109, 125, 99, 0.18), transparent 34%),
-    linear-gradient(180deg, rgba(255, 251, 245, 0.96), rgba(240, 232, 220, 0.92));
+  background-image: url("./persona-sheet.png");
+  background-size: 500% 200%;
+  background-repeat: no-repeat;
+  background-position: 0% 0%;
   border: 1px solid rgba(23, 21, 17, 0.06);
 }
+
+.persona-slide:nth-child(1) .persona-slide-media { background-position: 0% 0%; }
+.persona-slide:nth-child(2) .persona-slide-media { background-position: 25% 0%; }
+.persona-slide:nth-child(3) .persona-slide-media { background-position: 50% 0%; }
+.persona-slide:nth-child(4) .persona-slide-media { background-position: 75% 0%; }
+.persona-slide:nth-child(5) .persona-slide-media { background-position: 100% 0%; }
+.persona-slide:nth-child(6) .persona-slide-media { background-position: 0% 100%; }
+.persona-slide:nth-child(7) .persona-slide-media { background-position: 25% 100%; }
+.persona-slide:nth-child(8) .persona-slide-media { background-position: 50% 100%; }
+.persona-slide:nth-child(9) .persona-slide-media { background-position: 75% 100%; }
+.persona-slide:nth-child(10) .persona-slide-media { background-position: 100% 100%; }
 
 .persona-slide strong {
   font-size: 1.2rem;
