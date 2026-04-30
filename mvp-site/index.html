@@ -276,7 +276,7 @@
             </p>
           </div>
           <div class="persona-slider" data-slider="persona">
-            <div class="persona-slider-track portrait-grid" id="persona-slider-track">
+            <div class="persona-slider-track" id="persona-slider-track">
               <article class="mini-card persona-slide"><strong>Собственнику</strong><span>понять, где есть порядок, а где не хватает ясности.</span></article>
               <article class="mini-card persona-slide"><strong>Бухгалтеру</strong><span>собрать вопросы без попытки стать экологом.</span></article>
               <article class="mini-card persona-slide"><strong>Директору</strong><span>увидеть следующий шаг до лишних расходов.</span></article>
@@ -556,14 +556,15 @@
           const getStep = () => {
             const slide = slides[0];
             if (!slide) return 0;
-            const gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || "0");
+            const styles = getComputedStyle(track);
+            const gap = parseFloat(styles.columnGap || styles.gap || "0");
             return slide.getBoundingClientRect().width + gap;
           };
 
           const visibleCount = () => {
             const step = getStep();
             if (!step) return 1;
-            return Math.max(1, Math.round(track.clientWidth / step));
+            return Math.max(1, Math.floor((track.clientWidth + 8) / step));
           };
 
           const pageCount = () => Math.max(1, slides.length - visibleCount() + 1);

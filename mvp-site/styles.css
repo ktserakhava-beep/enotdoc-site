@@ -453,12 +453,14 @@ li {
 .persona-slider-track {
   display: grid;
   grid-auto-flow: column;
+  grid-template-columns: none;
   grid-auto-columns: calc((100% - 36px) / 4);
   gap: 12px;
   overflow-x: auto;
   padding-bottom: 6px;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
+  scroll-behavior: smooth;
 }
 
 .persona-slider-track::-webkit-scrollbar {
@@ -466,6 +468,7 @@ li {
 }
 
 .persona-slide {
+  min-width: 0;
   scroll-snap-align: start;
   min-height: 132px;
 }
