@@ -185,7 +185,8 @@ li {
 }
 
 .menu-toggle,
-.mobile-menu {
+.mobile-menu,
+.topbar-cta {
   display: none;
 }
 
@@ -1105,9 +1106,23 @@ li {
     align-items: flex-start;
   }
 
+  .topbar {
+    grid-template-columns: minmax(0, 1fr) minmax(140px, auto) auto;
+  }
+
   .brand-mark {
     width: 84px;
     height: 84px;
+  }
+
+  .topbar-cta {
+    display: inline-flex;
+    min-width: 0;
+    width: auto;
+    padding: 0 14px;
+    font-size: 0.8rem;
+    min-height: 40px;
+    justify-self: center;
   }
 
   .menu-toggle {
@@ -1191,27 +1206,26 @@ li {
     color: rgba(23, 21, 17, 0.88);
   }
 
-  .mobile-menu-cta {
-    width: 100%;
-    margin-top: 4px;
-  }
-
   .portrait-grid-steps {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 14px;
+    align-items: stretch;
   }
 
-  .portrait-grid-steps .mini-card {
-    min-height: 180px;
+  .portrait-grid-steps .step-card {
+    min-height: 0;
+    height: 100%;
+    padding: 18px;
   }
 
-  .portrait-grid-steps .mini-card strong {
+  .portrait-grid-steps .step-card strong {
+    display: block;
     white-space: normal;
     font-size: 1rem;
     line-height: 1.3;
   }
 
-  .portrait-grid-steps .mini-card span {
+  .portrait-grid-steps .step-card span {
     display: block;
     -webkit-line-clamp: unset;
     overflow: visible;
@@ -1258,6 +1272,10 @@ li {
     min-height: 52px;
     padding: 8px 12px;
     border-radius: 14px;
+  }
+
+  .topbar {
+    grid-template-columns: minmax(0, 1fr) minmax(128px, auto) auto;
   }
 
   .page-shell {
@@ -1353,7 +1371,7 @@ li {
     gap: 12px;
   }
 
-  .portrait-grid-steps .mini-card {
+  .portrait-grid-steps .step-card {
     min-height: auto;
     padding: 18px 16px;
   }
@@ -1374,6 +1392,19 @@ li {
   .menu-toggle {
     width: 38px;
     height: 38px;
+    border-radius: 10px;
+  }
+
+  .topbar {
+    grid-template-columns: minmax(0, 1fr) minmax(116px, auto) auto;
+    column-gap: 8px;
+  }
+
+  .topbar-cta {
+    padding: 0 10px;
+    min-height: 38px;
+    font-size: 0.74rem;
+    line-height: 1.2;
     border-radius: 10px;
   }
 
@@ -1668,15 +1699,15 @@ h1, h2, h3 {
   margin: 0 auto;
 }
 
-.portrait-grid-steps .mini-card {
+.portrait-grid-steps .step-card {
   min-height: 220px;
 }
 
-.portrait-grid-steps .mini-card strong {
+.portrait-grid-steps .step-card strong {
   white-space: nowrap;
 }
 
-.portrait-grid-steps .mini-card span {
+.portrait-grid-steps .step-card span {
   display: -webkit-box;
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
