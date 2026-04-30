@@ -137,7 +137,7 @@ li {
 }
 
 .section-heading .section-text {
-  max-width: 78ch;
+  max-width: 92ch;
   margin-inline: auto;
 }
 
@@ -384,7 +384,7 @@ li {
 }
 
 .hero-text {
-  max-width: 78ch;
+  max-width: 92ch;
   margin: 0 auto;
   font-size: 1.02rem;
 }
@@ -429,7 +429,7 @@ li {
 }
 
 .section-copy .section-text {
-  max-width: 68ch;
+  max-width: 82ch;
   margin: 0;
 }
 
@@ -1048,7 +1048,7 @@ li {
 }
 
 .seo-page .section-text {
-  max-width: 72ch;
+  max-width: 86ch;
 }
 
 /* Responsive */
@@ -1686,11 +1686,11 @@ h1, h2, h3 {
 }
 
 .section-text-compact {
-  max-width: 78ch;
+  max-width: 90ch;
 }
 
 .section-text-result {
-  max-width: 82ch;
+  max-width: 94ch;
 }
 
 .portrait-grid-steps {
