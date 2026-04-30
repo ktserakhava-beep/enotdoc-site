@@ -35,6 +35,21 @@
           <a href="./index.html#intake">Контакт</a>
           <a class="nav-cta" href="./index.html#intake"><span>Оставить заявку</span></a>
         </div>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Открыть меню">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <div class="mobile-menu" id="mobile-menu">
+          <nav class="mobile-menu-links" aria-label="Мобильная навигация">
+            <a href="./index.html#for-whom">Для кого</a>
+            <a href="./index.html#result">Что получите</a>
+            <a href="./index.html#topics">Разделы</a>
+            <a href="./index.html#partners">Партнерам</a>
+            <a href="./index.html#intake">Контакт</a>
+            <a class="nav-cta mobile-menu-cta" href="./index.html#intake"><span>Оставить заявку</span></a>
+          </nav>
+        </div>
       </header>
 
       <main class="legal-page">
@@ -184,6 +199,39 @@
           </p>
         </section>
       </main>
+      <script>
+        (() => {
+          const topbar = document.querySelector(".topbar");
+          const menuToggle = document.querySelector(".menu-toggle");
+          const mobileMenu = document.getElementById("mobile-menu");
+
+          if (!topbar || !menuToggle || !mobileMenu) return;
+
+          const closeMenu = () => {
+            topbar.classList.remove("menu-open");
+            menuToggle.setAttribute("aria-expanded", "false");
+          };
+
+          menuToggle.addEventListener("click", () => {
+            const isOpen = topbar.classList.toggle("menu-open");
+            menuToggle.setAttribute("aria-expanded", String(isOpen));
+          });
+
+          mobileMenu.querySelectorAll("a").forEach((link) => {
+            link.addEventListener("click", closeMenu);
+          });
+
+          document.addEventListener("click", (event) => {
+            if (!topbar.classList.contains("menu-open")) return;
+            if (topbar.contains(event.target)) return;
+            closeMenu();
+          });
+
+          window.addEventListener("resize", () => {
+            if (window.innerWidth > 1100) closeMenu();
+          });
+        })();
+      </script>
     </div>
   </body>
 </html>

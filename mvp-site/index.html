@@ -119,6 +119,22 @@
           <a href="#intake">Контакт</a>
           <a class="nav-cta" href="#intake">Разобрать ситуацию</a>
         </div>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Открыть меню">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <div class="mobile-menu" id="mobile-menu">
+          <nav class="mobile-menu-links" aria-label="Мобильная навигация">
+            <a href="#for-whom">Для кого</a>
+            <a href="#result">Результат</a>
+            <a href="#partners">Партнерам</a>
+            <a href="#faq">FAQ</a>
+            <a href="#topics">Разделы</a>
+            <a href="#intake">Контакт</a>
+            <a class="nav-cta mobile-menu-cta" href="#intake">Разобрать ситуацию</a>
+          </nav>
+        </div>
       </header>
 
       <main>
@@ -469,6 +485,36 @@
 
     <script>
       (() => {
+        const topbar = document.querySelector(".topbar");
+        const menuToggle = document.querySelector(".menu-toggle");
+        const mobileMenu = document.getElementById("mobile-menu");
+
+        if (topbar && menuToggle && mobileMenu) {
+          const closeMenu = () => {
+            topbar.classList.remove("menu-open");
+            menuToggle.setAttribute("aria-expanded", "false");
+          };
+
+          menuToggle.addEventListener("click", () => {
+            const isOpen = topbar.classList.toggle("menu-open");
+            menuToggle.setAttribute("aria-expanded", String(isOpen));
+          });
+
+          mobileMenu.querySelectorAll("a").forEach((link) => {
+            link.addEventListener("click", closeMenu);
+          });
+
+          document.addEventListener("click", (event) => {
+            if (!topbar.classList.contains("menu-open")) return;
+            if (topbar.contains(event.target)) return;
+            closeMenu();
+          });
+
+          window.addEventListener("resize", () => {
+            if (window.innerWidth > 1100) closeMenu();
+          });
+        }
+
         const endpoint = "/api/form";
         const form = document.getElementById("intake-form");
         const button = document.getElementById("intake-submit");
