@@ -840,6 +840,32 @@ li {
   gap: 12px;
 }
 
+.faq-intake-section {
+  padding-top: var(--space-9);
+}
+
+.faq-intake-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 760px) minmax(0, 760px);
+  justify-content: center;
+  gap: 28px;
+  align-items: start;
+}
+
+.faq-column {
+  width: 100%;
+}
+
+.faq-column-head {
+  margin-bottom: var(--space-5);
+  text-align: left;
+}
+
+.faq-column-head h2,
+.faq-column-head .section-text {
+  margin-inline: 0;
+}
+
 .faq-item {
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
@@ -893,6 +919,11 @@ li {
   padding: 28px;
   background: linear-gradient(180deg, rgba(255, 251, 245, 0.98), rgba(249, 241, 229, 0.94));
   box-shadow: var(--shadow);
+}
+
+.faq-intake-card {
+  position: sticky;
+  top: 96px;
 }
 
 .intake-card-head {
@@ -1090,6 +1121,7 @@ li {
   .feature-grid,
   .result-grid,
   .faq-grid,
+  .faq-intake-grid,
   .seo-answer-grid,
   .portrait-grid,
   .partner-panel,
@@ -1104,6 +1136,11 @@ li {
   .cta-block {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .faq-intake-card {
+    position: static;
+    top: auto;
   }
 
   .topbar {
