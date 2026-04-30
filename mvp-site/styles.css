@@ -843,7 +843,7 @@ li {
 .faq-item {
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
-  background: #fff;
+  background: rgba(255, 251, 245, 0.74);
   padding: 0 18px;
 }
 
