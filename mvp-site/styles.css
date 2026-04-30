@@ -1696,8 +1696,28 @@ h1, h2, h3 {
 .hero-text-mobile-3,
 .section-text-mobile-3,
 .section-text-mobile-2,
-.heading-mobile-2 {
+.heading-mobile-2,
+.hero-text-desktop-3,
+.section-text-desktop-3,
+.section-text-desktop-2,
+.heading-desktop-2 {
   max-width: none;
+}
+
+.hero-text-desktop-3 {
+  max-width: 118ch;
+}
+
+.section-text-desktop-3 {
+  max-width: 116ch;
+}
+
+.section-text-desktop-2 {
+  max-width: 124ch;
+}
+
+.heading-desktop-2 {
+  max-width: 30ch;
 }
 
 .portrait-grid-steps {
