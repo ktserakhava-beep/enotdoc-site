@@ -454,7 +454,7 @@ li {
   display: grid;
   grid-auto-flow: column;
   grid-template-columns: none;
-  grid-auto-columns: calc((100% - 54px) / 4);
+  grid-auto-columns: calc((100% - 32px) / 3);
   gap: 18px;
   overflow-x: auto;
   padding-bottom: 6px;
@@ -471,19 +471,19 @@ li {
 .persona-slide {
   min-width: 0;
   scroll-snap-align: start;
-  min-height: 220px;
-  padding: 22px;
+  min-height: 280px;
+  padding: 28px;
   align-content: start;
 }
 
 .persona-slide strong {
-  font-size: 1.12rem;
+  font-size: 1.2rem;
   line-height: 1.25;
 }
 
 .persona-slide span {
-  font-size: 0.98rem;
-  line-height: 1.65;
+  font-size: 1.02rem;
+  line-height: 1.7;
 }
 
 .persona-slider-controls {
@@ -1393,8 +1393,8 @@ li {
   }
 
   .persona-slide {
-    min-height: 200px;
-    padding: 20px 18px;
+    min-height: 240px;
+    padding: 22px 20px;
   }
 
   .topbar {
