@@ -461,6 +461,7 @@ li {
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
   scroll-behavior: smooth;
+  transition: transform 320ms ease;
 }
 
 .persona-slider-track::-webkit-scrollbar {
